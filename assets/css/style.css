@@ -79,3 +79,58 @@
 .dialog-card-art img{display:block;width:100%;height:100%;max-height:360px;object-fit:contain}
 @media(max-width:720px){.catalog-controls{align-items:stretch}.rarity-filter{justify-content:flex-end}.dialog-visual{height:320px}.dialog-content{padding:25px 22px 30px}.dialog-visual-label{left:20px;bottom:18px}.character-dialog{max-height:90vh}}
 @media(prefers-reduced-motion:reduce){.character-card,.dialog-visual img{transition:none!important}}
+
+
+/* Character catalogue: consistent artwork framing and equal-height cards */
+.character-grid{
+  grid-auto-rows:1fr;
+  align-items:stretch;
+}
+.character-card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  min-width:0;
+}
+.character-art{
+  height:auto;
+  aspect-ratio:16 / 10;
+  flex:0 0 auto;
+  background-color:#e8e3d8;
+}
+.character-art:before{width:42%;height:auto;aspect-ratio:1}
+.character-art img{
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  padding:8px;
+}
+.character-info{
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  min-height:205px;
+}
+.character-info h3{line-height:1.25;min-height:27px}
+.character-info p{
+  line-height:1.5;
+  min-height:30px;
+}
+.character-description{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  min-height:34px;
+  max-height:34px;
+}
+.card-more{margin-top:auto;padding-top:14px}
+@media(max-width:720px){
+  .character-art{aspect-ratio:4 / 3;height:auto}
+  .character-info{min-height:190px}
+}
+@media(max-width:390px){
+  .character-art{aspect-ratio:16 / 10;height:auto}
+}
