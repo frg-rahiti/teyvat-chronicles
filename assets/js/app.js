@@ -335,6 +335,96 @@
     }, {passive:true});
   }
 
+  // Global navigation, scroll progress, ambient hero details and interactive card lighting.
+  const body = document.body;
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  body.append(progress);
+
+  const backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.type = 'button';
+  backToTop.setAttribute('aria-label', 'Retour en haut');
+  backToTop.innerHTML = '<span>↑</span>';
+  body.append(backToTop);
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'}));
+
+  const updateScrollUI = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+    backToTop.classList.toggle('is-visible', window.scrollY > 520);
+  };
+  updateScrollUI();
+  window.addEventListener('scroll', updateScrollUI, {passive:true});
+
+  // Tiny ambient particles: CSS-only motion after this one-time DOM setup.
+  const heroArt = document.querySelector('.hero-art');
+  if (heroArt && !heroArt.querySelector('.hero-particles')) {
+    const particles = document.createElement('div');
+    particles.className = 'hero-particles';
+    particles.setAttribute('aria-hidden', 'true');
+    for (let index = 0; index < 22; index += 1) {
+      const particle = document.createElement('i');
+      particle.style.setProperty('--particle-x', `${(index * 37 + 11) % 96}%`);
+      particle.style.setProperty('--particle-y', `${(index * 53 + 7) % 90}%`);
+      particle.style.setProperty('--particle-delay', `${(index % 8) * -0.7}s`);
+      particle.style.setProperty('--particle-duration', `${5 + (index % 6)}s`);
+      particles.append(particle);
+    }
+    heroArt.prepend(particles);
+  }
+
+  // Active navigation follows the section currently visible on screen.
+  const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
+  const observedSections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && observedSections.length) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      const current = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!current) return;
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${current.target.id}`;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }, {rootMargin:'-25% 0px -60% 0px', threshold:[0,.15,.35,.6]});
+    observedSections.forEach(section => sectionObserver.observe(section));
+  }
+
+  // Soft pointer lighting and restrained 3D tilt for desktop cards.
+  const attachCardMotion = root => {
+    root.querySelectorAll('.character-card, .region-card, .guide-card').forEach(card => {
+      if (card.dataset.motionReady) return;
+      card.dataset.motionReady = 'true';
+      card.addEventListener('pointermove', event => {
+        if (reduceMotion || event.pointerType === 'touch' || !window.matchMedia('(hover: hover)').matches) return;
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        card.style.setProperty('--pointer-x', `${(x * 100).toFixed(1)}%`);
+        card.style.setProperty('--pointer-y', `${(y * 100).toFixed(1)}%`);
+        card.style.setProperty('--tilt-x', `${((x - .5) * 3.2).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${((.5 - y) * 3.2).toFixed(2)}deg`);
+      }, {passive:true});
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--tilt-x','0deg');
+        card.style.setProperty('--tilt-y','0deg');
+      }, {passive:true});
+    });
+  };
+  attachCardMotion(document);
+  if (grid) {
+    const motionObserver = new MutationObserver(() => attachCardMotion(grid));
+    motionObserver.observe(grid, {childList:true});
+  }
+
+  // Filter feedback: make each result update feel intentional, not like a hard redraw.
+  [searchInput, rarityFilter].filter(Boolean).forEach(control => {
+    control.addEventListener('focus', () => control.closest('.search-box, .rarity-filter')?.classList.add('is-focused'));
+    control.addEventListener('blur', () => control.closest('.search-box, .rarity-filter')?.classList.remove('is-focused'));
+  });
   const header = document.querySelector('.site-header');
   const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
   updateHeader();
