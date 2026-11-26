@@ -3,7 +3,7 @@
 -- Les URL d'images sont enregistrées en base ; elles sont chargées par le navigateur.
 
 ALTER TABLE characters
-  ADD COLUMN IF NOT EXISTS slug VARCHAR(100) NOT NULL DEFAULT '' AFTER id,
+  ADD COLUMN slug VARCHAR(100) NOT NULL DEFAULT '' AFTER id,
   ADD COLUMN IF NOT EXISTS card_url VARCHAR(700) NOT NULL DEFAULT '' AFTER image_url,
   ADD COLUMN IF NOT EXISTS splash_url VARCHAR(700) NOT NULL DEFAULT '' AFTER card_url;
 
@@ -18,7 +18,7 @@ SET slug = CASE
   WHEN name = 'Xiangling' THEN 'xiangling'
   WHEN name = 'Ningguang' THEN 'ningguang'
   WHEN name = 'Keqing' THEN 'keqing'
-  WHEN name = 'Ayaka' THEN 'kamisato-ayaka'
+  WHEN name = 'Ayaka' THEN 'ayaka'
   WHEN name = 'Collei' THEN 'collei'
   WHEN name = 'Neuvillette' THEN 'neuvillette'
   ELSE LOWER(REPLACE(name, ' ', '-'))
@@ -31,4 +31,4 @@ SET
   splash_url = CONCAT('https://genshin.jmp.blue/characters/', slug, '/gacha-splash')
 WHERE card_url = '' OR splash_url = '';
 
-CREATE INDEX IF NOT EXISTS idx_characters_slug ON characters (slug);
+CREATE INDEX idx_characters_slug ON characters (slug);
