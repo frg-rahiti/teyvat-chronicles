@@ -52,3 +52,30 @@
 @keyframes note-float{0%,100%{translate:0 0}50%{translate:0 -9px}}
 @keyframes ticker-drift{from{transform:translateX(0)}to{transform:translateX(-12%)}}
 @media(prefers-reduced-motion:reduce){.hero-glass,.hero-sigil,.orbit-a,.orbit-b,.floating-note,.ticker div,.community-orb{animation:none!important}.character-card:hover,.region-card:hover,.guide-card:hover{transform:none}}
+
+
+/* Playable character catalogue and profile modal */
+.catalog-controls{display:flex;flex-direction:column;align-items:flex-end;gap:10px;min-width:0}
+.rarity-filter{display:flex;align-items:center;gap:10px;color:#8b8f8d;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.rarity-filter select{border:1px solid #d9d5ca;background:#fff;color:#34414a;padding:8px 12px;font:inherit;letter-spacing:0;outline-color:#b8a477}
+.character-card{display:block;width:100%;padding:0;border:0;text-align:left;color:inherit;cursor:pointer;font:inherit;background:#fff}
+.character-card:focus-visible{outline:2px solid #9d8556;outline-offset:3px}
+.character-art img.image-unavailable{display:none}
+.card-more{display:inline-block;margin-top:13px;color:#8b754d;font-size:9px;letter-spacing:.08em}
+.card-more b{margin-left:9px}
+.character-dialog{width:min(920px,calc(100vw - 28px));max-width:920px;max-height:min(88vh,900px);padding:0;border:1px solid rgba(217,189,131,.45);background:#111e2b;color:#f6f1e7;box-shadow:0 25px 90px rgba(0,0,0,.5);overflow:auto}
+.character-dialog::backdrop{background:rgba(5,10,16,.78);backdrop-filter:blur(7px)}
+.dialog-close{position:sticky;top:12px;float:right;z-index:5;margin:12px 12px -52px 0;width:38px;height:38px;border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(12,22,32,.7);color:#fff;font-size:25px;cursor:pointer;line-height:1}
+.dialog-visual{height:420px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#536b76,#182735 70%)}
+.dialog-visual img{width:100%;height:100%;object-fit:contain;object-position:center bottom;position:relative;z-index:1}
+.dialog-visual-shade{position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(9,17,26,.78));z-index:2;pointer-events:none}
+.dialog-visual-label{position:absolute;z-index:3;left:30px;bottom:24px;font:12px var(--serif);letter-spacing:.2em;color:var(--gold2);text-transform:uppercase}
+.dialog-content{padding:32px 38px 38px}
+.dialog-content h3{font:clamp(32px,5vw,48px) var(--serif);font-weight:400;margin:12px 0 4px}
+.dialog-title{color:var(--gold);font:17px var(--serif);margin:0 0 18px}
+.dialog-meta{display:inline-block;padding:10px 13px;border:1px solid rgba(217,189,131,.35);color:#c7d0d1;font-size:10px;letter-spacing:.08em}
+.dialog-description{max-width:680px;color:#bac5c8;font-size:13px;line-height:1.9;margin:20px 0 28px}
+.dialog-card-art{max-width:260px;max-height:360px;margin:0 auto;overflow:hidden;border:1px solid rgba(217,189,131,.28);background:#1c2a36}
+.dialog-card-art img{display:block;width:100%;height:100%;max-height:360px;object-fit:contain}
+@media(max-width:720px){.catalog-controls{align-items:stretch}.rarity-filter{justify-content:flex-end}.dialog-visual{height:320px}.dialog-content{padding:25px 22px 30px}.dialog-visual-label{left:20px;bottom:18px}.character-dialog{max-height:90vh}}
+@media(prefers-reduced-motion:reduce){.character-card,.dialog-visual img{transition:none!important}}
