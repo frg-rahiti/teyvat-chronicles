@@ -326,3 +326,8 @@ body{selection-background-color:#d9bd83}
   .hero-art .hero-glass,.hero-art .orbit,.hero-art .hero-sigil,
   .hero-art .floating-note,.hero-art .hero-caption{translate:none!important;transition:none!important;will-change:auto}
 }
+
+
+/* Marqueur de build temporaire pour vérifier la synchronisation OVH. */
+.build-stamp{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(217,189,131,.38);border-radius:999px;padding:6px 10px;color:#d9bd83!important;font-size:8px!important;letter-spacing:.13em;background:rgba(217,189,131,.07)}
+.build-stamp:before{content:"";width:6px;height:6px;border-radius:50%;background:#8fc9a5;box-shadow:0 0 9px rgba(143,201,165,.7)}
