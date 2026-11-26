@@ -84,6 +84,60 @@
     else dialog.setAttribute('open', '');
   }
 
+  const IMAGE_API = 'https://genshin-api.deve.sh/characters?details=true';
+
+  function normalizeCharacterKey(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\\u0300-\\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  async function enrichWithExternalImages(characters) {
+    const missingImages = characters.some(character => !character.card_url && !character.image_url);
+    if (!missingImages) return characters;
+
+    try {
+      const response = await fetch(IMAGE_API, {
+        headers: {'Accept':'application/json'},
+        cache: 'force-cache'
+      });
+      if (!response.ok) throw new Error(`API images HTTP ${response.status}`);
+
+      const payload = await response.json();
+      const remoteCharacters = Array.isArray(payload.characters)
+        ? payload.characters
+        : (Array.isArray(payload) ? payload : []);
+
+      const byKey = new Map();
+      remoteCharacters.forEach(remote => {
+        const key = normalizeCharacterKey(remote.key || remote.slug || remote.name);
+        const name = normalizeCharacterKey(remote.name);
+        if (key) byKey.set(key, remote);
+        if (name) byKey.set(name, remote);
+      });
+
+      return characters.map(character => {
+        if (character.card_url || character.image_url) return character;
+
+        const remote = byKey.get(normalizeCharacterKey(character.slug))
+          || byKey.get(normalizeCharacterKey(character.name));
+        const images = remote?.img || remote?.images || {};
+
+        return {
+          ...character,
+          card_url: images.card || images.portrait || images['icon-big'] || images.icon || '',
+          splash_url: images.banner || images.splash || images.portrait || images.card || ''
+        };
+      });
+    } catch (error) {
+      console.warn('Teyvat Chronicles: source d’images externe indisponible, conservation du catalogue MySQL.', error);
+      return characters;
+    }
+  }
+
   async function loadCharacters() {
     try {
       const response = await fetch('api/catalog.php', {
@@ -94,7 +148,8 @@
       if (!response.ok || !data.ok || !Array.isArray(data.characters)) {
         throw new Error(data.message || 'Catalogue local indisponible');
       }
-      allCharacters = data.characters;
+
+      allCharacters = await enrichWithExternalImages(data.characters);
       count.textContent = `Catalogue MySQL · ${data.total || allCharacters.length} personnages`;
       renderCharacters();
     } catch (error) {
