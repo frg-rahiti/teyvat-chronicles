@@ -66,9 +66,13 @@ function normalize_weapon(string $weapon): string {
 
 $cacheFile = sys_get_temp_dir() . '/teyvat-chronicles-catalog-fr.json';
 $payload = null;
-if (is_file($cacheFile) && (time() - (int) filemtime($cacheFile)) < CATALOG_CACHE_TTL) {
+$stalePayload = null;
+if (is_file($cacheFile)) {
     $cached = file_get_contents($cacheFile);
-    if (is_string($cached) && $cached !== '') $payload = $cached;
+    if (is_string($cached) && $cached !== '') {
+        $stalePayload = $cached;
+        if ((time() - (int) filemtime($cacheFile)) < CATALOG_CACHE_TTL) $payload = $cached;
+    }
 }
 
 if ($payload === null) {
@@ -78,6 +82,8 @@ if ($payload === null) {
     }
     if ($payload !== null) {
         @file_put_contents($cacheFile, $payload, LOCK_EX);
+    } elseif ($stalePayload !== null) {
+        $payload = $stalePayload;
     }
 }
 
