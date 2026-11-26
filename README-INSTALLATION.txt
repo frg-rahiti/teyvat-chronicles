@@ -5,7 +5,8 @@ CONTENU
 - index.php                 Page principale du site
 - assets/css/style.css      Design responsive
 - assets/js/app.js          Recherche, filtres, menu mobile, newsletter
-- api/characters.php        API PHP qui lit les personnages en MySQL
+- api/characters.php        API PHP qui lit les personnages en MySQL (secours)
+- api/catalog.php           Catalogue des personnages jouables + cache 12 h
 - api/subscribe.php         Enregistrement des inscriptions newsletter
 - database/schema.sql       Tables + personnages de démonstration
 - config.example.php        Exemple de configuration MySQL
@@ -47,7 +48,9 @@ pour votre domaine.
 
 6) TESTER
 Ouvrez votre domaine.
-- Le catalogue doit afficher les personnages issus de MySQL.
+- Le catalogue principal charge les personnages jouables depuis l'API publique genshin.jmp.blue.
+  Les illustrations de carte et splash art sont chargées depuis cette même source.
+  Le cache serveur dure 12 heures. La base MySQL reste utilisée comme secours.
 - La recherche et les filtres doivent fonctionner.
 - Le formulaire newsletter doit enregistrer les e-mails dans
   newsletter_subscribers.
@@ -73,3 +76,16 @@ SÉCURITÉ / PROCHAINES ÉTAPES
 - Les images des personnages ne sont pas embarquées dans cette version.
   Le site affiche des visuels typographiques élégants en attendant que vous
   ajoutiez des images dont vous avez le droit d'utiliser les fichiers.
+
+
+CATALOGUE DES PERSONNAGES
+- La page utilise api/catalog.php, un proxy PHP avec cache de 12 heures.
+- Source des données et images : https://genshin.jmp.blue/
+- Projet API communautaire : https://github.com/genshindev/api
+- Les images ne sont pas copiées dans ce dépôt : elles sont servies par la source.
+  Une connexion Internet et l'accès sortant HTTPS depuis l'hébergement sont requis.
+- Si la source distante est indisponible, le site tente le catalogue MySQL local,
+  puis affiche un petit jeu de données de démonstration.
+- La source est non officielle et peut modifier son format ou devenir indisponible.
+- Les illustrations et marques Genshin Impact restent la propriété de HoYoverse
+  et de leurs ayants droit. Le site est un projet de fans non officiel.
