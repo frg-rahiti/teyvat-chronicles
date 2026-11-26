@@ -317,6 +317,24 @@
     cardObserver.observe(grid, {childList:true});
   }
 
+  // Parallaxe légère du décor du hero, uniquement avec une souris/stylet précis.
+  const hero = document.querySelector('.hero');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hero && !reduceMotion) {
+    hero.addEventListener('pointermove', event => {
+      if (event.pointerType === 'touch') return;
+      const rect = hero.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      hero.style.setProperty('--parallax-x', `${(x * 14).toFixed(1)}px`);
+      hero.style.setProperty('--parallax-y', `${(y * 10).toFixed(1)}px`);
+    }, {passive:true});
+    hero.addEventListener('pointerleave', () => {
+      hero.style.setProperty('--parallax-x', '0px');
+      hero.style.setProperty('--parallax-y', '0px');
+    }, {passive:true});
+  }
+
   const header = document.querySelector('.site-header');
   const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
   updateHeader();
