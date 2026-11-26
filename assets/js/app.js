@@ -165,9 +165,11 @@
         const weapon = String(remote.weapon || remote.weapon_type || local.weapon || '');
         const nation = String(remote.nation || remote.region || local.region || '');
         const remoteKey = normalizeCharacterKey(remote.key || remote.slug || remote.name);
-        // Ces trois fiches ont une image card absente ou défectueuse dans la source :
-        // utiliser leur illustration icon-big, fournie par les données de l'API.
-        const needsImageFallback = ['ayaka', 'manekin', 'manekina'].includes(remoteKey);
+        const remoteName = normalizeCharacterKey(remote.name || '');
+        // Ayaka et les Voyageurs de Miliastra : privilégier les fichiers icon-big,
+        // les cartes card étant absentes ou parfois indisponibles dans la source.
+        const needsImageFallback = ['ayaka', 'kamisato-ayaka', 'manekin', 'manekina'].includes(remoteKey)
+          || remoteName.includes('ayaka');
         const imageCard = needsImageFallback
           ? (images['icon-big'] || images.portrait || images.icon || images.card || '')
           : (images.card || images.portrait || images['icon-big'] || images.icon || '');
