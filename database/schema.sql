@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS characters (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(100) NOT NULL DEFAULT '',
   name VARCHAR(80) NOT NULL,
   title VARCHAR(140) NOT NULL DEFAULT '',
   element VARCHAR(30) NOT NULL,
@@ -8,9 +9,12 @@ CREATE TABLE IF NOT EXISTS characters (
   region VARCHAR(60) NOT NULL DEFAULT '',
   description VARCHAR(500) NOT NULL DEFAULT '',
   image_url VARCHAR(500) NOT NULL DEFAULT '',
+  card_url VARCHAR(700) NOT NULL DEFAULT '',
+  splash_url VARCHAR(700) NOT NULL DEFAULT '',
   is_published TINYINT(1) NOT NULL DEFAULT 1,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_character_name (name),
+  INDEX idx_characters_slug (slug),
   INDEX idx_character_element (element)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
