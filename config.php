@@ -5,8 +5,8 @@
  */
 return [
     'db' => [
-        'host' => 'mysql248.eu004',
-        'name' => 'thomasloyhrf.mysql.db',
+        'host' => 'thomasloyhrf.mysql.db',
+        'name' => 'thomasloyhrf',
         'user' => 'thomasloyhrf',
         'pass' => 'Monster4554',
     ],
