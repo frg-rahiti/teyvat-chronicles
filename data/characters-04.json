@@ -1,0 +1,98 @@
+[
+  {
+    "id": "dehya",
+    "name": "Dehya",
+    "title": "Crinière ardente",
+    "description": "Une membre des Érémites, une bande de mercenaires qui agit dans le désert de Sumeru. Guerrière courageuse et puissante, elle possède une excellente réputation parmi ses compagnons érémites.",
+    "element": "Pyro",
+    "weapon": "Épée à deux mains",
+    "rarity": 5,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/dehya/card",
+    "splash_url": "https://genshin.jmp.blue/characters/dehya/gacha-splash"
+  },
+  {
+    "id": "diluc",
+    "name": "Diluc",
+    "title": "Ombre de l'Aurore",
+    "description": "Un jeune noble possédant la plupart des entreprises du vin de Mondstadt. Nul ne saurait sous-estimer sa richesse, sa réputation et ses capacités.",
+    "element": "Pyro",
+    "weapon": "Épée à deux mains",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/diluc/card",
+    "splash_url": "https://genshin.jmp.blue/characters/diluc/gacha-splash"
+  },
+  {
+    "id": "diona",
+    "name": "Diona",
+    "title": "Cocktail façon Queue de Chat",
+    "description": "Une jeune fille au sang pas tout à fait humain. Elle travaille comme barmaid à La Queue de Chat où elle est très appréciée.",
+    "element": "Cryo",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/diona/card",
+    "splash_url": "https://genshin.jmp.blue/characters/diona/gacha-splash"
+  },
+  {
+    "id": "dori",
+    "name": "Dori",
+    "title": "Trésor du jardin onirique",
+    "description": "Une marchande ambulante avec un penchant pour les moras scintillants.",
+    "element": "Électro",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/dori/card",
+    "splash_url": "https://genshin.jmp.blue/characters/dori/gacha-splash"
+  },
+  {
+    "id": "durin",
+    "name": "Durin",
+    "title": "« Feu inextinguible »",
+    "description": "Un dragon né de la plume de M, qui a atterri dans le monde des humains. Son « histoire » continue de se dévoiler...",
+    "element": "Pyro",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/durin/card",
+    "splash_url": "https://genshin.jmp.blue/characters/durin/gacha-splash"
+  },
+  {
+    "id": "emilie",
+    "name": "Émilie",
+    "title": "Tracé de mille parfums",
+    "description": "Une parfumeuse fontainoise, celle qui embouteille les secrets.",
+    "element": "Dendro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/emilie/card",
+    "splash_url": "https://genshin.jmp.blue/characters/emilie/gacha-splash"
+  },
+  {
+    "id": "escoffier",
+    "name": "Escoffier",
+    "title": "Exquise excellence",
+    "description": "L'ancienne cheffe de l'Hôtel Debord, connue à Fontaine comme la suprême pâtissière et l'avant-garde de la gastronomie de précision, qui applique une exigence incomparable à sa cuisine.",
+    "element": "Cryo",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/escoffier/card",
+    "splash_url": "https://genshin.jmp.blue/characters/escoffier/gacha-splash"
+  },
+  {
+    "id": "eula",
+    "name": "Eula",
+    "title": "Vague déferlante",
+    "description": "Le « Chevalier aux Embruns », né de l'ancien Clan Lawrence, capitaine de l'unité de reconnaissance des chevaliers de l'Ordre de Favonius de Mondstadt. Que cette descendante de la noblesse d'antan ait rejoint les chevaliers de l'Ordre, l'ennemi jusqu'alors juré de la famille, demeure un mystère aux yeux de beaucoup.",
+    "element": "Cryo",
+    "weapon": "Épée à deux mains",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/eula/card",
+    "splash_url": "https://genshin.jmp.blue/characters/eula/gacha-splash"
+  }
+]
