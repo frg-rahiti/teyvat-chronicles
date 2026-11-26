@@ -58,14 +58,22 @@ $siteName = 'TEYVAT CHRONICLES';
       </div>
       <div class="character-toolbar">
         <label class="search-box"><span>⌕</span><input id="character-search" type="search" placeholder="Rechercher un personnage..." autocomplete="off"></label>
-        <div class="filter-group" id="element-filters">
-          <button class="filter active" data-element="all">Tous</button><button class="filter" data-element="Anémo">Anémo</button><button class="filter" data-element="Géo">Géo</button><button class="filter" data-element="Électro">Électro</button><button class="filter" data-element="Dendro">Dendro</button><button class="filter" data-element="Hydro">Hydro</button><button class="filter" data-element="Pyro">Pyro</button><button class="filter" data-element="Cryo">Cryo</button>
+        <div class="catalog-controls">
+          <div class="filter-group" id="element-filters" aria-label="Filtrer par élément">
+            <button class="filter active" data-element="all">Tous</button><button class="filter" data-element="Anémo">Anémo</button><button class="filter" data-element="Géo">Géo</button><button class="filter" data-element="Électro">Électro</button><button class="filter" data-element="Dendro">Dendro</button><button class="filter" data-element="Hydro">Hydro</button><button class="filter" data-element="Pyro">Pyro</button><button class="filter" data-element="Cryo">Cryo</button>
+          </div>
+          <label class="rarity-filter"><span>Rareté</span><select id="rarity-filter"><option value="all">Toutes</option><option value="5">5 étoiles</option><option value="4">4 étoiles</option></select></label>
         </div>
       </div>
       <div class="character-grid" id="character-grid">
         <div class="loading-state"><span class="loader"></span> Chargement des voyageurs…</div>
       </div>
-      <div class="section-bottom"><span id="character-count">Personnages de Teyvat</span><span class="small-note">Données chargées depuis la base de données du site</span></div>
+      <div class="section-bottom"><span id="character-count">Chargement du catalogue…</span><span class="small-note">Cliquez sur une carte pour ouvrir la fiche complète</span></div>
+      <dialog class="character-dialog" id="character-dialog" aria-labelledby="dialog-name">
+        <button class="dialog-close" type="button" aria-label="Fermer la fiche">×</button>
+        <div class="dialog-visual"><img id="dialog-splash" alt=""><div class="dialog-visual-shade"></div><div class="dialog-visual-label" id="dialog-vision"></div></div>
+        <div class="dialog-content"><div class="eyebrow"><i></i> Dossier du voyageur</div><h3 id="dialog-name"></h3><p class="dialog-title" id="dialog-title"></p><div class="dialog-meta" id="dialog-meta"></div><p class="dialog-description" id="dialog-description"></p><div class="dialog-card-art"><img id="dialog-card" alt="Illustration de carte"></div></div>
+      </dialog>
     </section>
 
     <section class="regions-section" id="regions">
