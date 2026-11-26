@@ -6,7 +6,7 @@ CONTENU
 - assets/css/style.css      Design responsive
 - assets/js/app.js          Recherche, filtres, menu mobile, newsletter
 - api/characters.php        API PHP qui lit les personnages en MySQL (secours)
-- api/catalog.php           Catalogue des personnages jouables + cache 12 h
+- api/catalog.php           Catalogue local lu depuis MySQL
 - api/subscribe.php         Enregistrement des inscriptions newsletter
 - database/schema.sql       Tables + personnages de démonstration
 - config.example.php        Exemple de configuration MySQL
@@ -48,14 +48,18 @@ pour votre domaine.
 
 6) TESTER
 Ouvrez votre domaine.
-- Le catalogue principal charge les personnages jouables depuis l'API publique genshin.jmp.blue.
-  Les illustrations de carte et splash art sont chargées depuis cette même source.
-  Le cache serveur dure 12 heures. La base MySQL reste utilisée comme secours.
-- La recherche et les filtres doivent fonctionner.
-- Le formulaire newsletter doit enregistrer les e-mails dans
-  newsletter_subscribers.
-Si la base n'est pas encore configurée, la page affiche un aperçu local
-de démonstration et l'inscription newsletter indique que la base manque.
+- Le catalogue principal lit maintenant les personnages depuis MySQL.
+- La recherche et les filtres utilisent les données locales.
+- Le formulaire newsletter enregistre les e-mails dans newsletter_subscribers.
+Pour remplir le catalogue, suivez database/IMPORT-CHARACTERS.txt.
+
+IMPORT DU CATALOGUE
+Le script tools/build_character_import.py se lance sur votre PC Windows.
+Il génère database/characters_import.sql et database/characters_images.csv.
+Importez le fichier SQL dans phpMyAdmin sur la base OVH. Pour télécharger aussi
+les images sur votre PC, lancez le script avec --download-images, puis transférez
+le dossier uploads/characters/ sur OVH avant de réimporter le SQL.
+L'hébergement OVH ne contacte donc plus l'API pour afficher les personnages.
 
 PYTHON
 Le site n'a pas besoin d'un processus Python qui tourne en permanence.
@@ -79,13 +83,10 @@ SÉCURITÉ / PROCHAINES ÉTAPES
 
 
 CATALOGUE DES PERSONNAGES
-- La page utilise api/catalog.php, un proxy PHP avec cache de 12 heures.
-- Source des données et images : https://genshin.jmp.blue/
-- Projet API communautaire : https://github.com/genshindev/api
-- Les images ne sont pas copiées dans ce dépôt : elles sont servies par la source.
-  Une connexion Internet et l'accès sortant HTTPS depuis l'hébergement sont requis.
-- Si la source distante est indisponible, le site tente le catalogue MySQL local,
-  puis affiche un petit jeu de données de démonstration.
-- La source est non officielle et peut modifier son format ou devenir indisponible.
-- Les illustrations et marques Genshin Impact restent la propriété de HoYoverse
+- api/catalog.php lit exclusivement la table MySQL characters.
+- Les champs card_url et splash_url contiennent les URL ou chemins locaux des images.
+- La génération de l'import est réalisée depuis le PC, jamais depuis OVH.
+- Source communautaire de données : https://github.com/theBowja/genshin-db
+- API utilisée par l'outil local de génération : https://genshin.jmp.blue/
+- Les images et la marque Genshin Impact restent la propriété de HoYoverse
   et de leurs ayants droit. Le site est un projet de fans non officiel.
