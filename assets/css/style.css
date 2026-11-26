@@ -172,7 +172,7 @@
 .filter{position:relative}
 .filter:after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:1px;background:#a78b52;transform:scaleX(0);transform-origin:center;transition:transform .25s}
 .filter.active:after{transform:scaleX(1)}
-.character-grid .character-card{animation:catalogue-enter .48s var(--motion-ease) both;animation-delay:calc(min(var(--card-index),12)*.035s)}
+.character-grid .character-card{animation:catalogue-enter .48s var(--motion-ease) both;animation-delay:calc(var(--card-index)*.035s)}
 @keyframes dialog-enter{from{opacity:0;transform:translateY(22px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes backdrop-enter{from{background:rgba(5,10,16,0)}to{background:rgba(5,10,16,.78)}}
 @keyframes dialog-art-enter{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
