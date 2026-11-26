@@ -317,21 +317,36 @@
     cardObserver.observe(grid, {childList:true});
   }
 
-  // Parallaxe légère du décor du hero, uniquement avec une souris/stylet précis.
+  // Parallaxe multi-couches : chaque élément du décor se déplace à une vitesse différente.
   const hero = document.querySelector('.hero');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (hero && !reduceMotion) {
+  if (hero && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const layers = [
+      {node: hero.querySelector('.hero-glass'), factor: 18},
+      {node: hero.querySelector('.orbit-a'), factor: 30},
+      {node: hero.querySelector('.orbit-b'), factor: -24},
+      {node: hero.querySelector('.hero-sigil'), factor: 42},
+      {node: hero.querySelector('.floating-note.note-top'), factor: 26},
+      {node: hero.querySelector('.floating-note.note-bottom'), factor: -18},
+      {node: hero.querySelector('.hero-caption'), factor: 12}
+    ].filter(layer => layer.node);
+
     hero.addEventListener('pointermove', event => {
-      if (event.pointerType === 'touch') return;
       const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      hero.style.setProperty('--parallax-x', `${(x * 14).toFixed(1)}px`);
-      hero.style.setProperty('--parallax-y', `${(y * 10).toFixed(1)}px`);
+      const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
+      layers.forEach(({node, factor}) => {
+        const distance = factor / 2;
+        node.style.translate = `${(x * distance).toFixed(1)}px ${(y * distance * .65).toFixed(1)}px`;
+      });
+      hero.style.setProperty('--hero-pointer-x', `${(event.clientX - rect.left).toFixed(0)}px`);
+      hero.style.setProperty('--hero-pointer-y', `${(event.clientY - rect.top).toFixed(0)}px`);
     }, {passive:true});
+
     hero.addEventListener('pointerleave', () => {
-      hero.style.setProperty('--parallax-x', '0px');
-      hero.style.setProperty('--parallax-y', '0px');
+      layers.forEach(({node}) => { node.style.translate = '0px 0px'; });
+      hero.style.removeProperty('--hero-pointer-x');
+      hero.style.removeProperty('--hero-pointer-y');
     }, {passive:true});
   }
 
