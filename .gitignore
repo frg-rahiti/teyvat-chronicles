@@ -1,0 +1,15 @@
+# Secrets et configuration locale
+/config.php
+/.env
+/.env.*
+
+# Images téléchargées localement : transfert séparé vers OVH
+/uploads/characters/
+
+# Fichiers générés par l'outil d'import
+/database/characters_import.sql
+/database/characters_images.csv
+
+# Python
+__pycache__/
+*.py[cod]
