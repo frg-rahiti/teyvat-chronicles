@@ -1,0 +1,98 @@
+[
+  {
+    "id": "aether",
+    "name": "Aether",
+    "title": "",
+    "description": "Un voyageur venant d'un autre monde qui a été séparé de sa sœur. Il débute son périple à la recherche des Sept Archons de Teyvat dans l'espoir de la retrouver.",
+    "element": "Aucun",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Inconnue",
+    "card_url": "https://genshin.jmp.blue/characters/aether/card",
+    "splash_url": "https://genshin.jmp.blue/characters/aether/gacha-splash"
+  },
+  {
+    "id": "aino",
+    "name": "Aino",
+    "title": "Mécano aux gadgets à gogo",
+    "description": "Une inventeuse et mécanicienne de génie de Nod-Krai qui aime les machines intéressantes et les friandises.",
+    "element": "Hydro",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/aino/card",
+    "splash_url": "https://genshin.jmp.blue/characters/aino/gacha-splash"
+  },
+  {
+    "id": "albedo",
+    "name": "Albedo",
+    "title": "Kreideprinz",
+    "description": "Génie connu sous le surnom de « Kreideprinz », Albedo est l'alchimiste en chef et le capitaine des enquêteurs de l'Ordre de Favonius.",
+    "element": "Géo",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/albedo/card",
+    "splash_url": "https://genshin.jmp.blue/characters/albedo/gacha-splash"
+  },
+  {
+    "id": "alhaitham",
+    "name": "Alhaitham",
+    "title": "Instruction d'admonestation",
+    "description": "L'actuel scribe de l'Académie de Sumeru, doté d'une intelligence et d'un talent extraordinaires. Son goût pour une vie libre de contraintes est tel qu'il est difficile pour la plupart des gens de savoir où le trouver.",
+    "element": "Dendro",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/alhaitham/card",
+    "splash_url": "https://genshin.jmp.blue/characters/alhaitham/gacha-splash"
+  },
+  {
+    "id": "aloy",
+    "name": "Aloy",
+    "title": "Salvatrice d'un autre monde",
+    "description": "Autrefois une paria, maintenant une chasseuse d'une acuité sans précédent. Toujours prête à utiliser son arc pour la bonne cause.",
+    "element": "Cryo",
+    "weapon": "Arc",
+    "rarity": 5,
+    "region": "Inconnue",
+    "card_url": "https://genshin.jmp.blue/characters/aloy/card",
+    "splash_url": "https://genshin.jmp.blue/characters/aloy/gacha-splash"
+  },
+  {
+    "id": "amber",
+    "name": "Amber",
+    "title": "Championne de planage",
+    "description": "Une jeune fille pleine d'énergie. Elle est la seule et unique Éclaireuse de l'Ordre de Favonius.",
+    "element": "Pyro",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/amber/card",
+    "splash_url": "https://genshin.jmp.blue/characters/amber/gacha-splash"
+  },
+  {
+    "id": "aratakiitto",
+    "name": "Arataki Itto",
+    "title": "Héros de Hanamizaka",
+    "description": "Le premier et plus grand chef du gang Arataki, célèbre dans tout Hanamizaka, à la Cité d'Inazuma... Hein, quoi ? Jamais entendu parler d'eux ? Sérieux ?",
+    "element": "Géo",
+    "weapon": "Épée à deux mains",
+    "rarity": 5,
+    "region": "Inazuma",
+    "card_url": "https://genshin.jmp.blue/characters/aratakiitto/card",
+    "splash_url": "https://genshin.jmp.blue/characters/aratakiitto/gacha-splash"
+  },
+  {
+    "id": "arlecchino",
+    "name": "Arlecchino",
+    "title": "Lune sinistre",
+    "description": "Quatrième Exécutrice des Fatui, Arlecchino est une diplomate posée et impitoyable. Pour les enfants du Foyer de l'âtre, elle est leur « Père » redoutée mais fiable.",
+    "element": "Pyro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Snezhnaya",
+    "card_url": "https://genshin.jmp.blue/characters/arlecchino/card",
+    "splash_url": "https://genshin.jmp.blue/characters/arlecchino/gacha-splash"
+  }
+]
