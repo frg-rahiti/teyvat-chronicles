@@ -84,24 +84,77 @@
     else dialog.setAttribute('open', '');
   }
 
+  function normalizeRemoteCharacters(payload) {
+    const records = payload?.characters || payload?.data || payload;
+    if (!records || typeof records !== 'object') return [];
+    const entries = Array.isArray(records)
+      ? records.map((item, index) => [String(index), item])
+      : Object.entries(records);
+    const labels = {
+      anemo:'Anémo', geo:'Géo', electro:'Électro', dendro:'Dendro',
+      hydro:'Hydro', pyro:'Pyro', cryo:'Cryo',
+      sword:'Épée', claymore:'Épée à deux mains', polearm:'Lance',
+      catalyst:'Catalyseur', bow:'Arc'
+    };
+    return entries.flatMap(([key, item]) => {
+      if (!item || typeof item !== 'object') return [];
+      const name = item.name || item.Name || item.displayName || key;
+      if (!name) return [];
+      const slug = String(item.id || item.key || item.slug || key || name)
+        .toLowerCase().trim().replace(/[ _]+/g, '-').replace(/[^a-z0-9-]/g, '');
+      const elementRaw = item.vision || item.element || item.Vision || item.Element || 'Inconnu';
+      const weaponRaw = item.weapon || item.weaponType || item.Weapon || 'Inconnue';
+      const rarity = Number(item.rarity || item.Rarity) || 4;
+      return [{
+        id: slug,
+        name,
+        title: item.title || item.Title || 'Voyageur de Teyvat',
+        element: labels[String(elementRaw).toLowerCase()] || elementRaw,
+        weapon: labels[String(weaponRaw).toLowerCase()] || weaponRaw,
+        rarity: rarity >= 1 && rarity <= 5 ? rarity : 4,
+        region: item.nation || item.region || item.Nation || 'Inconnue',
+        description: item.description || item.Description || 'Découvrez son histoire et ses talents dans Teyvat.',
+        card_url: `https://genshin.jmp.blue/characters/${encodeURIComponent(slug)}/card`,
+        splash_url: `https://genshin.jmp.blue/characters/${encodeURIComponent(slug)}/gacha-splash`
+      }];
+    }).sort((a, b) => b.rarity - a.rarity || a.name.localeCompare(b.name, 'fr'));
+  }
+
   async function loadCharacters() {
+    // First try from the visitor's browser: this avoids OVH's outbound
+    // server connection, which is currently failing on this hosting plan.
     try {
-      const response = await fetch('api/catalog.php', {headers:{'Accept':'application/json'}});
-      if (!response.ok) throw new Error('Catalogue distant indisponible');
-      const data = await response.json();
-      if (!data.ok || !Array.isArray(data.characters) || !data.characters.length) throw new Error('Réponse catalogue invalide');
-      allCharacters = data.characters;
-      count.textContent = `Catalogue chargé · ${data.total || allCharacters.length} personnages`;
-    } catch (catalogError) {
+      const response = await fetch('https://genshin.jmp.blue/characters/all?lang=fr', {
+        headers: {'Accept':'application/json'},
+        mode: 'cors'
+      });
+      if (!response.ok) throw new Error(`API HTTP ${response.status}`);
+      const payload = await response.json();
+      const remoteCharacters = normalizeRemoteCharacters(payload);
+      if (!remoteCharacters.length) throw new Error('Aucun personnage reçu');
+      allCharacters = remoteCharacters;
+      count.textContent = `Catalogue en ligne · ${allCharacters.length} personnages`;
+    } catch (browserApiError) {
+      // Compatibility fallback: keep the PHP proxy and then the local DB.
       try {
-        const response = await fetch('api/characters.php', {headers:{'Accept':'application/json'}});
+        const response = await fetch('api/catalog.php', {headers:{'Accept':'application/json'}});
         const data = await response.json();
-        if (!response.ok || !data.ok || !Array.isArray(data.characters)) throw new Error('Base locale indisponible');
+        if (!response.ok || !data.ok || !Array.isArray(data.characters) || !data.characters.length) {
+          throw new Error('Proxy indisponible');
+        }
         allCharacters = data.characters;
-        count.textContent = 'Catalogue local de secours';
+        count.textContent = `Catalogue serveur · ${data.total || allCharacters.length} personnages`;
       } catch {
-        allCharacters = fallbackCharacters;
-        count.textContent = 'Aperçu de démonstration · source distante indisponible';
+        try {
+          const response = await fetch('api/characters.php', {headers:{'Accept':'application/json'}});
+          const data = await response.json();
+          if (!response.ok || !data.ok || !Array.isArray(data.characters)) throw new Error('Base locale indisponible');
+          allCharacters = data.characters;
+          count.textContent = 'Catalogue local de secours';
+        } catch {
+          allCharacters = fallbackCharacters;
+          count.textContent = 'Aperçu de démonstration · sources indisponibles';
+        }
       }
     }
     renderCharacters();
