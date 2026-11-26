@@ -1,0 +1,98 @@
+[
+  {
+    "id": "hutao",
+    "name": "Hu Tao",
+    "title": "Fragrance nivale",
+    "description": "La 77e directrice du Funérarium Wangsheng, qui redonne un coup de jeune à la gestion des affaires funéraires de Liyue.",
+    "element": "Pyro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/hutao/card",
+    "splash_url": "https://genshin.jmp.blue/characters/hutao/gacha-splash"
+  },
+  {
+    "id": "iansan",
+    "name": "Iansan",
+    "title": "Forgée dans la roche volcanique",
+    "description": "Entraîneuse principale du club de fitness du Collectif de l'abondance et nutritionniste réputée de Natlan.",
+    "element": "Électro",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/iansan/card",
+    "splash_url": "https://genshin.jmp.blue/characters/iansan/gacha-splash"
+  },
+  {
+    "id": "ifa",
+    "name": "Ifa",
+    "title": "Zéphyr spirituel",
+    "description": "Un vétérinaire du Clan des fleurplumes qui apprécie sincèrement la compagnie des gens, des animaux et de tous les autres êtres vivants.",
+    "element": "Anémo",
+    "weapon": "Catalyseur",
+    "rarity": 4,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/ifa/card",
+    "splash_url": "https://genshin.jmp.blue/characters/ifa/gacha-splash"
+  },
+  {
+    "id": "illuga",
+    "name": "Illuga",
+    "title": "Cœur ardent des nuits terrifiantes",
+    "description": "Membre de l'escouade d'enquête appelée « Orioles des nuits terrifiantes », et le plus jeune chef d'escouade des Gardiens de lumière.",
+    "element": "Géo",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/illuga/card",
+    "splash_url": "https://genshin.jmp.blue/characters/illuga/gacha-splash"
+  },
+  {
+    "id": "ineffa",
+    "name": "Ineffa",
+    "title": "Onde foudroyante",
+    "description": "Un robot multifonction intégrant des composants mécaniques de différentes nations. Le noyau source de sa poitrine a résisté au passage d'innombrables années.",
+    "element": "Électro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/ineffa/card",
+    "splash_url": "https://genshin.jmp.blue/characters/ineffa/gacha-splash"
+  },
+  {
+    "id": "jahoda",
+    "name": "Jahoda",
+    "title": "Ombre tisse-vent",
+    "description": "L'employée extrêmement fiable et polyvalente du Curatorium (du moins, c'est ce qu'elle prétend).",
+    "element": "Anémo",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/jahoda/card",
+    "splash_url": "https://genshin.jmp.blue/characters/jahoda/gacha-splash"
+  },
+  {
+    "id": "jean",
+    "name": "Jean",
+    "title": "Chevalier au Pissenlit",
+    "description": "Le Chevalier au Pissenlit, loyal et rigoureux, et la Grande Maîtresse suppléante de l'Ordre de Favonius.",
+    "element": "Anémo",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/jean/card",
+    "splash_url": "https://genshin.jmp.blue/characters/jean/gacha-splash"
+  },
+  {
+    "id": "kachina",
+    "name": "Kachina",
+    "title": "Or brut moucheté",
+    "description": "Une jeune guerrière des Nanatzcayens à qui a été accordé l'antique nom d'« Uthabiti ». C'est une jeune fille bienveillante et déterminée qui grandit en affrontant l'adversité.",
+    "element": "Géo",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/kachina/card",
+    "splash_url": "https://genshin.jmp.blue/characters/kachina/gacha-splash"
+  }
+]
