@@ -134,3 +134,53 @@
 @media(max-width:390px){
   .character-art{aspect-ratio:16 / 10;height:auto}
 }
+
+
+/* Teyvat motion pass — layered parallax, tactile cards and cinematic profile dialog */
+.hero-glass,.hero-sigil,.orbit,.floating-note{
+  translate:var(--parallax-x,0px) var(--parallax-y,0px);
+  transition:translate .28s ease-out;
+}
+.hero-glass{will-change:translate}
+.hero-sigil{transition:translate .35s ease-out}
+.orbit{transition:translate .45s ease-out}
+.floating-note{transition:translate .35s ease-out}
+.character-card{
+  position:relative;
+  transform-origin:center bottom;
+  backface-visibility:hidden;
+}
+.character-card:focus-visible{transform:translateY(-3px)}
+.character-card:hover .character-info h3{color:#8c7040;transition:color .25s ease}
+.character-art{isolation:isolate}
+.character-art:before{z-index:0;transition:transform .65s var(--motion-ease),opacity .65s}
+.character-card:hover .character-art:before{transform:scale(1.12);opacity:.72}
+.character-art img{z-index:1}
+.character-art .element-pill,.character-art .rarity{z-index:3}
+.character-card .character-info{position:relative}
+.character-card .card-more{transition:letter-spacing .25s,color .25s}
+.character-card:hover .card-more{letter-spacing:.14em;color:#725a32}
+.character-dialog[open]{animation:dialog-enter .42s var(--motion-ease) both}
+.character-dialog[open]::backdrop{animation:backdrop-enter .32s ease both}
+.dialog-visual img{animation:dialog-art-enter .7s .08s var(--motion-ease) both}
+.dialog-content>*{animation:dialog-content-enter .45s var(--motion-ease) both}
+.dialog-content>*:nth-child(2){animation-delay:.05s}
+.dialog-content>*:nth-child(3){animation-delay:.1s}
+.dialog-content>*:nth-child(4){animation-delay:.15s}
+.dialog-close{transition:transform .25s,background .25s}
+.dialog-close:hover{transform:rotate(90deg);background:rgba(217,189,131,.22)}
+.filter{position:relative}
+.filter:after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:1px;background:#a78b52;transform:scaleX(0);transform-origin:center;transition:transform .25s}
+.filter.active:after{transform:scaleX(1)}
+.character-grid .character-card{animation:catalogue-enter .48s var(--motion-ease) both;animation-delay:calc(min(var(--card-index),12)*.035s)}
+@keyframes dialog-enter{from{opacity:0;transform:translateY(22px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes backdrop-enter{from{background:rgba(5,10,16,0)}to{background:rgba(5,10,16,.78)}}
+@keyframes dialog-art-enter{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+@keyframes dialog-content-enter{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@keyframes catalogue-enter{from{opacity:0;translate:0 13px}to{opacity:1;translate:0 0}}
+@media(hover:none){.character-card:hover{transform:none}.character-card:hover .character-art img{transform:none}.hero-glass,.hero-sigil,.orbit,.floating-note{translate:0 0}}
+@media(prefers-reduced-motion:reduce){
+  .hero-glass,.hero-sigil,.orbit,.floating-note{translate:none!important;transition:none!important}
+  .character-grid .character-card,.character-dialog[open],.character-dialog[open]::backdrop,.dialog-visual img,.dialog-content>*{animation:none!important}
+  .character-card:hover .character-art:before{transform:none}
+}
