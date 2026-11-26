@@ -105,7 +105,20 @@
   const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add('revealed'); revealObserver.unobserve(entry.target); }
   }), {threshold:0.12});
-  document.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section').forEach(el => revealObserver.observe(el));
+  const observeReveals = root => {
+    root.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card')
+      .forEach(el => revealObserver.observe(el));
+  };
+  observeReveals(document);
+  if (grid) {
+    const cardObserver = new MutationObserver(() => observeReveals(grid));
+    cardObserver.observe(grid, {childList:true});
+  }
+
+  const header = document.querySelector('.site-header');
+  const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, {passive:true});
 
   loadCharacters();
 })();
