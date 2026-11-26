@@ -1,0 +1,72 @@
+IMPORT DU CATALOGUE PERSONNAGES — TEYVAT CHRONICLES
+====================================================
+
+Pourquoi cette méthode ?
+------------------------
+OVH n'arrive pas à joindre de façon fiable l'API externe. Le script Python
+s'exécute donc sur votre PC Windows, où la connexion Internet fonctionne,
+et prépare un fichier SQL que vous importez ensuite dans votre base MySQL OVH.
+Le site ne contacte plus l'API pour lire le catalogue : api/catalog.php lit MySQL.
+
+IMPORTANT : les images ne doivent pas être stockées comme des fichiers binaires
+dans MySQL. La base stocke leurs URL ou chemins. Les fichiers eux-mêmes doivent
+être conservés dans /uploads/characters/ sur l'hébergement.
+
+ÉTAPE 1 — Générer le catalogue et les liens
+-------------------------------------------
+À la racine du projet, ouvrez PowerShell ou CMD puis exécutez :
+
+  py tools/build_character_import.py
+
+Cela génère :
+- database/characters_import.sql : données + liens d'images à importer dans MySQL
+- database/characters_images.csv : inventaire des liens de portraits et splash arts
+
+Les champs card_url et splash_url reçoivent les URL distantes.
+
+ÉTAPE 2 — Importer dans OVH
+---------------------------
+1. Ouvrez phpMyAdmin depuis votre espace client OVH.
+2. Sélectionnez la base utilisée par Teyvat Chronicles.
+3. Cliquez sur Importer.
+4. Sélectionnez database/characters_import.sql.
+5. Lancez l'import.
+
+Le script utilise INSERT ... ON DUPLICATE KEY UPDATE : il met à jour les
+personnages existants au lieu de créer des doublons basés sur leur nom.
+
+ÉTAPE 3 — Héberger les images sur OVH (optionnel mais recommandé)
+-----------------------------------------------------------------
+Pour télécharger automatiquement les images depuis votre PC dans le projet :
+
+  py tools/build_character_import.py --download-images
+
+Le script crée uploads/characters/<slug>/card.png et splash.png lorsque les
+images sont disponibles, et génère un SQL qui référence alors les chemins
+locaux /uploads/characters/<slug>/card.png.
+
+Envoyez ensuite le dossier uploads/characters/ sur votre hébergement OVH
+dans le dossier racine du site. Importez le nouveau database/characters_import.sql
+dans phpMyAdmin pour remplacer les URL distantes par les chemins locaux.
+
+ÉTAPE 4 — Vérifier
+------------------
+Ouvrez :
+  https://ws2rf.thomaslopez.fr/api/catalog.php
+
+La réponse doit contenir :
+  "ok": true
+  "source": "teyvat-chronicles-database"
+  "total": un nombre supérieur à 12
+  "characters": [...]
+
+Puis rechargez la page avec Ctrl + F5.
+
+NOTES
+-----
+- Le script doit être lancé sur votre PC, pas sur OVH.
+- Il dépend de la disponibilité de genshin.jmp.blue au moment de la génération.
+- La source est communautaire et non officielle. Les données et images peuvent
+  nécessiter une vérification manuelle.
+- Genshin Impact, ses personnages et illustrations appartiennent à HoYoverse
+  et à leurs ayants droit. Respectez leurs conditions d'utilisation.
