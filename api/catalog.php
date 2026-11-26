@@ -1,5 +1,10 @@
 <?php
 declare(strict_types=1);
+
+// Never let PHP notices/warnings corrupt the JSON response.
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: public, max-age=900');
 
@@ -19,8 +24,17 @@ function catalog_fetch(string $url): ?string {
         ]);
         $body = curl_exec($ch);
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        return ($status >= 200 && $status < 300 && is_string($body)) ? $body : null;
+        $curlError = curl_error($ch);
+
+        // curl_close() is deprecated/no-op on recent PHP versions; releasing
+        // the handle when this function returns is sufficient.
+        unset($ch);
+
+        if ($status < 200 || $status >= 300 || !is_string($body)) {
+            error_log('Teyvat Chronicles catalog request failed: HTTP ' . $status . ($curlError !== '' ? ' - ' . $curlError : ''));
+            return null;
+        }
+        return $body;
     }
 
     $context = stream_context_create(['http' => [
