@@ -73,9 +73,9 @@ SÉCURITÉ / PROCHAINES ÉTAPES
 - Le site est une base MVP fan-made : il n'est ni affilié à HoYoverse,
   ni un site officiel. Genshin Impact, ses personnages et marques appartiennent
   à leurs ayants droit.
-- Les images des personnages ne sont pas embarquées dans cette version.
-  Le site affiche des visuels typographiques élégants en attendant que vous
-  ajoutiez des images dont vous avez le droit d'utiliser les fichiers.
+- Les images ne sont pas stockées dans le dépôt : le catalogue les charge
+  depuis la source communautaire documentée ci-dessous. Si cette source est
+  indisponible, le catalogue local peut afficher des visuels de remplacement.
 
 
 CATALOGUE DES PERSONNAGES
