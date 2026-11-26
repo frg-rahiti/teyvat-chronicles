@@ -95,6 +95,14 @@
       .replace(/^-|-$/g, '');
   }
 
+  // Canonicalise les noms officiels et les noms courts utilisés par l'ancien catalogue MySQL.
+  function canonicalCharacterName(value) {
+    const key = normalizeCharacterKey(value);
+    return key === 'kamisato-ayaka' ? 'ayaka'
+      : key === 'kamisato-ayato' ? 'ayato'
+      : key;
+  }
+
   async function enrichWithExternalImages(characters) {
     try {
       const response = await fetch(IMAGE_API, {
@@ -125,7 +133,7 @@
       };
       const localByName = new Map();
       characters.forEach(local => {
-        const key = normalizeCharacterKey(local.name);
+        const key = canonicalCharacterName(local.name);
         if (key) localByName.set(key, local);
       });
 
@@ -138,7 +146,7 @@
       const getCanonicalKey = remote => {
         const traveler = getTraveler(remote);
         if (traveler) return `traveler-${traveler}`;
-        return normalizeCharacterKey(remote.name || remote.key || remote.slug);
+        return canonicalCharacterName(remote.name || remote.key || remote.slug);
       };
 
       // Regroupe les variantes élémentaires du Voyageur et déduplique les autres personnages par nom.
@@ -159,7 +167,7 @@
         const traveler = canonicalKey.startsWith('traveler-') ? canonicalKey.slice('traveler-'.length) : '';
         const local = traveler
           ? localByName.get(traveler === 'aether' ? 'aether' : 'lumine') || {}
-          : localByName.get(normalizeCharacterKey(remote.name)) || {};
+          : localByName.get(canonicalCharacterName(remote.name || remote.key || remote.slug)) || {};
         const images = remote.img || remote.images || {};
         const vision = String(remote.vision || remote.element || local.element || '');
         const weapon = String(remote.weapon || remote.weapon_type || local.weapon || '');
@@ -170,10 +178,12 @@
         // les cartes card étant absentes ou parfois indisponibles dans la source.
         const needsImageFallback = ['ayaka', 'kamisato-ayaka', 'manekin', 'manekina'].includes(remoteKey)
           || remoteName.includes('ayaka');
-        const imageCard = needsImageFallback
+        // Les cartes du catalogue affichent désormais l'illustration splash (banner/gacha-splash).
+        // Les portraits restent en secours si la source ne possède pas de splash.
+        const imageSplash = images.banner || images.splash || '';
+        const imageCard = imageSplash || (needsImageFallback
           ? (images['icon-big'] || images.portrait || images.icon || images.card || '')
-          : (images.card || images.portrait || images['icon-big'] || images.icon || '');
-        const imageSplash = images.banner || images.splash || images.portrait || images['icon-big'] || imageCard || '';
+          : (images.card || images.portrait || images['icon-big'] || images.icon || ''));
 
         completeRoster.push({
           ...local,
@@ -186,8 +196,8 @@
           rarity: Number(remote.rarity || local.rarity || 4),
           region: regionLabels[nation.toLowerCase()] || nation || local.region || 'Inconnu',
           description: remote.description || local.description || '',
-          card_url: local.card_url || imageCard || local.image_url || '',
-          splash_url: local.splash_url || imageSplash || imageCard || local.card_url || ''
+          card_url: imageCard || local.card_url || local.image_url || '',
+          splash_url: imageSplash || local.splash_url || imageCard || local.card_url || ''
         });
       });
 
@@ -201,9 +211,9 @@
       });
 
       // Ajoute uniquement les fiches locales dont le nom n'existe pas déjà dans le catalogue distant.
-      const seenNames = new Set(completeRoster.map(character => normalizeCharacterKey(character.name)));
+      const seenNames = new Set(completeRoster.map(character => canonicalCharacterName(character.name)));
       characters.forEach(local => {
-        const key = normalizeCharacterKey(local.name);
+        const key = canonicalCharacterName(local.name);
         if (key && !seenNames.has(key)) {
           completeRoster.push(local);
           seenNames.add(key);
