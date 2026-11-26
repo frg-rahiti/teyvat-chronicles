@@ -59,14 +59,14 @@ def main() -> int:
     DB_DIR.mkdir(parents=True, exist_ok=True)
     print("1/3 — Récupération de la liste des personnages depuis le PC…")
     try:
-        slugs = get_json(f"{BASE_URL}/characters")
+        slugs = get_json(f"{BASE_URL}/characters/all?lang=fr")
     except Exception as exc:
         print(f"ERREUR: impossible de joindre {BASE_URL} depuis ce PC: {exc}")
         print("Aucun fichier n'a été généré. Vérifie ta connexion puis réessaie.")
         return 1
 
     if isinstance(slugs, dict):
-        slugs = slugs.get("characters") or slugs.get("data") or []
+        slugs = slugs.get("characters") or slugs.get("data") or list(slugs.values())
     if not isinstance(slugs, list) or not slugs:
         print("ERREUR: la réponse de la source ne contient aucune liste de personnages.")
         return 1
@@ -75,11 +75,17 @@ def main() -> int:
     total = len(slugs)
     print(f"2/3 — Lecture des fiches ({total} identifiants)…")
     for index, item in enumerate(slugs, start=1):
-        slug = str(item).strip().lower()
+        if isinstance(item, dict):
+            slug = value(item, "id", "slug", "name").strip().lower()
+            data = item
+        else:
+            slug = str(item).strip().lower()
+            data = None
         if not slug or "/" in slug or ".." in slug:
             continue
         try:
-            data = get_json(f"{BASE_URL}/characters/{slug}?lang=fr")
+            if data is None:
+                data = get_json(f"{BASE_URL}/characters/{slug}?lang=fr")
             if not isinstance(data, dict):
                 raise ValueError("fiche JSON invalide")
         except Exception as exc:
