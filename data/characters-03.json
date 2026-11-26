@@ -1,0 +1,98 @@
+[
+  {
+    "id": "chiori",
+    "name": "Chiori",
+    "title": "Couturière tonitruante",
+    "description": "La propriétaire de la Boutique Chioriya et une tailleuse réputée dans tout Fontaine.",
+    "element": "Géo",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Inazuma",
+    "card_url": "https://genshin.jmp.blue/characters/chiori/card",
+    "splash_url": "https://genshin.jmp.blue/characters/chiori/gacha-splash"
+  },
+  {
+    "id": "chongyun",
+    "name": "Chongyun",
+    "title": "Corps de glace et cœur de feu",
+    "description": "Le jeune héritier d'une célèbre famille d'exorcistes, qui s'efforce de contrôler l'énergie qui l'habite.",
+    "element": "Cryo",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/chongyun/card",
+    "splash_url": "https://genshin.jmp.blue/characters/chongyun/gacha-splash"
+  },
+  {
+    "id": "citlali",
+    "name": "Citlali",
+    "title": "Étoile opaline d'obsidienne",
+    "description": "La grande shamane des Maîtres du vent nocturne et la grand-mère Itztli que tous dans la tribu respectent.",
+    "element": "Cryo",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/citlali/card",
+    "splash_url": "https://genshin.jmp.blue/characters/citlali/gacha-splash"
+  },
+  {
+    "id": "clorinde",
+    "name": "Clorinde",
+    "title": "Porteuse de bougie et chasseuse d'ombres",
+    "description": "Une duelliste mandatée invaincue. Épée à la main, elle défend la justice dans la Cour de Fontaine.",
+    "element": "Électro",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/clorinde/card",
+    "splash_url": "https://genshin.jmp.blue/characters/clorinde/gacha-splash"
+  },
+  {
+    "id": "collei",
+    "name": "Collei",
+    "title": "Germe de renaissance",
+    "description": "Une garde forestière en formation active dans la Forêt d'Avidya. Derrière ses paroles et ses actions enthousiastes se cache une personnalité légèrement introvertie.",
+    "element": "Dendro",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/collei/card",
+    "splash_url": "https://genshin.jmp.blue/characters/collei/gacha-splash"
+  },
+  {
+    "id": "columbina",
+    "name": "Columbina",
+    "title": "Retour de l'astre de la nuit",
+    "description": "La Dame de la lune née à Nod-Krai, et la lune céleste de retour chez elle.",
+    "element": "Hydro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/columbina/card",
+    "splash_url": "https://genshin.jmp.blue/characters/columbina/gacha-splash"
+  },
+  {
+    "id": "cyno",
+    "name": "Cyno",
+    "title": "Juge des secrets",
+    "description": "Le général mahamatra chargé de superviser les chercheurs de l'Académie. On dit que lorsqu'il se met au travail, il est encore plus efficace que le grand vayuvyastra fabriqué par le Kshahrewar.",
+    "element": "Électro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/cyno/card",
+    "splash_url": "https://genshin.jmp.blue/characters/cyno/gacha-splash"
+  },
+  {
+    "id": "dahlia",
+    "name": "Dahlia",
+    "title": "Ode et oblation",
+    "description": "Ce diacre de l'Église de Favonius est le représentant de l'Archon Anémo au sein de l'Église.",
+    "element": "Hydro",
+    "weapon": "Épée à une main",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/dahlia/card",
+    "splash_url": "https://genshin.jmp.blue/characters/dahlia/gacha-splash"
+  }
+]
