@@ -14,7 +14,7 @@ $siteName = 'TEYVAT CHRONICLES';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=6">
+  <link rel="stylesheet" href="assets/css/style.css?v=7">
 </head>
 <body>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -116,6 +116,6 @@ $siteName = 'TEYVAT CHRONICLES';
 
   <footer class="site-footer"><a class="brand" href="#home"><span class="brand-mark">✧</span><span><b>TEYVAT</b><small>CHRONICLES</small></span></a><p>Un carnet de voyage créé par des fans, pour les fans.</p><div class="footer-bottom"><span>© <?= date('Y') ?> Teyvat Chronicles</span><span>Projet fan-made non officiel · Genshin Impact appartient à HoYoverse.</span><a href="#home">Retour en haut ↑</a></div></footer>
 
-  <script src="assets/js/app.js?v=11" defer></script>
+  <script src="assets/js/app.js?v=12" defer></script>
 </body>
 </html>
