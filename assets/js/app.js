@@ -164,8 +164,14 @@
         const vision = String(remote.vision || remote.element || local.element || '');
         const weapon = String(remote.weapon || remote.weapon_type || local.weapon || '');
         const nation = String(remote.nation || remote.region || local.region || '');
-        const imageCard = images.card || images.portrait || images['icon-big'] || images.icon || '';
-        const imageSplash = images.banner || images.splash || images.portrait || imageCard || '';
+        const remoteKey = normalizeCharacterKey(remote.key || remote.slug || remote.name);
+        // Ces trois fiches ont une image card absente ou défectueuse dans la source :
+        // utiliser leur illustration icon-big, fournie par les données de l'API.
+        const needsImageFallback = ['ayaka', 'manekin', 'manekina'].includes(remoteKey);
+        const imageCard = needsImageFallback
+          ? (images['icon-big'] || images.portrait || images.icon || images.card || '')
+          : (images.card || images.portrait || images['icon-big'] || images.icon || '');
+        const imageSplash = images.banner || images.splash || images.portrait || images['icon-big'] || imageCard || '';
 
         completeRoster.push({
           ...local,
