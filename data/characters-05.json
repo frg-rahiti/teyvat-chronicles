@@ -1,0 +1,98 @@
+[
+  {
+    "id": "faruzan",
+    "name": "Faruzan",
+    "title": "Machiniste énigmatique",
+    "description": "Une chercheuse qui vient « du siècle dernier ». Elle aime être l'aînée de tous et possède de vastes connaissances sur les textes anciens et la mécanique classique.",
+    "element": "Anémo",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/faruzan/card",
+    "splash_url": "https://genshin.jmp.blue/characters/faruzan/gacha-splash"
+  },
+  {
+    "id": "fischl",
+    "name": "Fischl",
+    "title": "Princesse du châtiment !",
+    "description": "Une fille mystérieuse qui se fait appeler « la Princesse du châtiment ». Elle est toujours accompagnée de son fidèle corbeau nocturne, Oz.",
+    "element": "Électro",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/fischl/card",
+    "splash_url": "https://genshin.jmp.blue/characters/fischl/gacha-splash"
+  },
+  {
+    "id": "flins",
+    "name": "Flins",
+    "title": "Étranges jeux d'ombres et de lumières",
+    "description": "L'un des Gardiens de lumière de Nod-Krai, qui veille sur le phare et le cimetière d'une petite île au nord. Un mystérieux gentilhomme dont les paroles et les actes témoignent d'un grand raffinement.",
+    "element": "Électro",
+    "weapon": "Arme d'hast",
+    "rarity": 5,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/flins/card",
+    "splash_url": "https://genshin.jmp.blue/characters/flins/gacha-splash"
+  },
+  {
+    "id": "freminet",
+    "name": "Fréminet",
+    "title": "Aspirant à des profondeurs invisibles",
+    "description": "Un jeune homme réservé qui connaît bien la plongée. Sous son air lointain et glacial se cache un cœur pur dépourvu de tout défaut.",
+    "element": "Cryo",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/freminet/card",
+    "splash_url": "https://genshin.jmp.blue/characters/freminet/gacha-splash"
+  },
+  {
+    "id": "furina",
+    "name": "Furina",
+    "title": "Solo infini de solitude",
+    "description": "Le point central absolu de la scène du jugement, jusqu'aux applaudissements finaux.",
+    "element": "Hydro",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/furina/card",
+    "splash_url": "https://genshin.jmp.blue/characters/furina/gacha-splash"
+  },
+  {
+    "id": "gaming",
+    "name": "Gaming",
+    "title": "Avant-garde léonine",
+    "description": "Un mercenaire des Transporteurs des coffres-lames et le meneur de la troupe de wushou « Mythiques bêtes mystiques ».",
+    "element": "Pyro",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/gaming/card",
+    "splash_url": "https://genshin.jmp.blue/characters/gaming/gacha-splash"
+  },
+  {
+    "id": "ganyu",
+    "name": "Ganyu",
+    "title": "Défense fervente",
+    "description": "Secrétaire du Pavillon Yuehai ; du sang de Qilin, la créature mythique, coule dans ses veines.",
+    "element": "Cryo",
+    "weapon": "Arc",
+    "rarity": 5,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/ganyu/card",
+    "splash_url": "https://genshin.jmp.blue/characters/ganyu/gacha-splash"
+  },
+  {
+    "id": "gorou",
+    "name": "Gorou",
+    "title": "Guerrier canin",
+    "description": "Le grand général des forces de l'Île de Watatsumi, en qui ses subordonnés ont profondément confiance.",
+    "element": "Géo",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Inazuma",
+    "card_url": "https://genshin.jmp.blue/characters/gorou/card",
+    "splash_url": "https://genshin.jmp.blue/characters/gorou/gacha-splash"
+  }
+]
