@@ -56,10 +56,10 @@ Pour remplir le catalogue, suivez database/IMPORT-CHARACTERS.txt.
 IMPORT DU CATALOGUE
 Le script tools/build_character_import.py se lance sur votre PC Windows.
 Il génère database/characters_import.sql et database/characters_images.csv.
-Importez le fichier SQL dans phpMyAdmin sur la base OVH. Pour télécharger aussi
-les images sur votre PC, lancez le script avec --download-images, puis transférez
-le dossier uploads/characters/ sur OVH avant de réimporter le SQL.
-L'hébergement OVH ne contacte donc plus l'API pour afficher les personnages.
+Importez le SQL dans phpMyAdmin. Pour télécharger aussi les images sur votre PC,
+lancez le script avec --download-images, puis transférez uploads/characters/
+sur OVH avant de réimporter le SQL. L'hébergement ne contacte pas l'API pour
+afficher le catalogue.
 
 PYTHON
 Le site n'a pas besoin d'un processus Python qui tourne en permanence.
@@ -77,16 +77,16 @@ SÉCURITÉ / PROCHAINES ÉTAPES
 - Le site est une base MVP fan-made : il n'est ni affilié à HoYoverse,
   ni un site officiel. Genshin Impact, ses personnages et marques appartiennent
   à leurs ayants droit.
-- Les images ne sont pas stockées dans le dépôt : le catalogue les charge
-  depuis la source communautaire documentée ci-dessous. Si cette source est
-  indisponible, le catalogue local peut afficher des visuels de remplacement.
+- Le catalogue des personnages est lu depuis MySQL, sans appel API à chaque visite.
+- Les images peuvent être conservées sous forme d'URL ou copiées dans uploads/ sur OVH.
 
 
 CATALOGUE DES PERSONNAGES
 - api/catalog.php lit exclusivement la table MySQL characters.
 - Les champs card_url et splash_url contiennent les URL ou chemins locaux des images.
 - La génération de l'import est réalisée depuis le PC, jamais depuis OVH.
+- Guide : database/IMPORT-CHARACTERS.txt
 - Source communautaire de données : https://github.com/theBowja/genshin-db
-- API utilisée par l'outil local de génération : https://genshin.jmp.blue/
+- API utilisée uniquement par le générateur local : https://genshin.jmp.blue/
 - Les images et la marque Genshin Impact restent la propriété de HoYoverse
   et de leurs ayants droit. Le site est un projet de fans non officiel.
