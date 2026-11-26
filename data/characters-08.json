@@ -1,0 +1,98 @@
+[
+  {
+    "id": "klee",
+    "name": "Klee",
+    "title": "Soleil fuyant",
+    "description": "Une invitée régulière des cellules de l'Ordre de Favonius, et également la maîtresse des explosions à Mondstadt, où on la surnomme « le soleil fuyant ».",
+    "element": "Pyro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/klee/card",
+    "splash_url": "https://genshin.jmp.blue/characters/klee/gacha-splash"
+  },
+  {
+    "id": "kujousara",
+    "name": "Kujou Sara",
+    "title": "Kaburaya de plume de corvidé",
+    "description": "Une générale de la Commission administrative. Audacieuse, décisive et habile au combat.",
+    "element": "Électro",
+    "weapon": "Arc",
+    "rarity": 4,
+    "region": "Inazuma",
+    "card_url": "https://genshin.jmp.blue/characters/kujousara/card",
+    "splash_url": "https://genshin.jmp.blue/characters/kujousara/gacha-splash"
+  },
+  {
+    "id": "kukishinobu",
+    "name": "Kuki Shinobu",
+    "title": "Réparatrice d'afflictions",
+    "description": "La fiable et talentueuse cheffe adjointe du gang Arataki... Veuillez noter que ces adjectifs ne s'appliquent pas au gang Arataki à son ensemble, mais seulement à sa cheffe adjointe.",
+    "element": "Électro",
+    "weapon": "Épée à une main",
+    "rarity": 4,
+    "region": "Inazuma",
+    "card_url": "https://genshin.jmp.blue/characters/kukishinobu/card",
+    "splash_url": "https://genshin.jmp.blue/characters/kukishinobu/gacha-splash"
+  },
+  {
+    "id": "lanyan",
+    "name": "Lan Yan",
+    "title": "Printemps tressé de jade",
+    "description": "Une rotinière du Vallon Chenyu. Claire d'esprit et de bon caractère, elle est aussi agile qu'une source de montagne.",
+    "element": "Anémo",
+    "weapon": "Catalyseur",
+    "rarity": 4,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/lanyan/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lanyan/gacha-splash"
+  },
+  {
+    "id": "lauma",
+    "name": "Lauma",
+    "title": "Ode sacrée à la lune éternelle",
+    "description": "Dame bénie par le clair de lune et la forêt. Une lueur d'espoir née parmi les Descendants de givrelune.",
+    "element": "Dendro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/lauma/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lauma/gacha-splash"
+  },
+  {
+    "id": "layla",
+    "name": "Layla",
+    "title": "Merveilleuse étoile vespérale",
+    "description": "Une étudiante du Rtawahist spécialisée en astrologie théorique. Parfois somnambule, parfois insomniaque, elle souffre de troubles du sommeil.",
+    "element": "Cryo",
+    "weapon": "Épée à une main",
+    "rarity": 4,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/layla/card",
+    "splash_url": "https://genshin.jmp.blue/characters/layla/gacha-splash"
+  },
+  {
+    "id": "linnea",
+    "name": "Linnea",
+    "title": "Augure des merveilles",
+    "description": "Naturaliste et conseillère de la branche de Nod-Krai de la Guilde des aventuriers.",
+    "element": "Géo",
+    "weapon": "Arc",
+    "rarity": 5,
+    "region": "Nod-Krai",
+    "card_url": "https://genshin.jmp.blue/characters/linnea/card",
+    "splash_url": "https://genshin.jmp.blue/characters/linnea/gacha-splash"
+  },
+  {
+    "id": "lisa",
+    "name": "Lisa",
+    "title": "Sorcière à la rose",
+    "description": "Une bibliothécaire érudite mais un peu nonchalante, le plus grand talent diplômé de l'Académie de Sumeru de ces deux derniers siècles.",
+    "element": "Électro",
+    "weapon": "Catalyseur",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/lisa/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lisa/gacha-splash"
+  }
+]
