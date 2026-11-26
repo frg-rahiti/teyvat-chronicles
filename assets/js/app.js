@@ -96,44 +96,85 @@
   }
 
   async function enrichWithExternalImages(characters) {
-    const missingImages = characters.some(character => !character.card_url && !character.image_url);
-    if (!missingImages) return characters;
-
     try {
       const response = await fetch(IMAGE_API, {
         headers: {'Accept':'application/json'},
         cache: 'force-cache'
       });
-      if (!response.ok) throw new Error(`API images HTTP ${response.status}`);
+      if (!response.ok) throw new Error(`API personnages HTTP ${response.status}`);
 
       const payload = await response.json();
       const remoteCharacters = Array.isArray(payload.characters)
         ? payload.characters
         : (Array.isArray(payload) ? payload : []);
+      if (!remoteCharacters.length) throw new Error('La source externe ne retourne aucun personnage.');
 
+      const elementLabels = {
+        anemo:'Anémo', geo:'Géo', electro:'Électro', dendro:'Dendro',
+        hydro:'Hydro', pyro:'Pyro', cryo:'Cryo'
+      };
+      const weaponLabels = {
+        sword:'Épée', claymore:'Épée à deux mains', polearm:'Lance',
+        catalyst:'Catalyseur', bow:'Arc'
+      };
+      const regionLabels = {
+        mondstadt:'Mondstadt', liyue:'Liyue', inazuma:'Inazuma',
+        sumeru:'Sumeru', fontaine:'Fontaine', natlan:'Natlan',
+        snezhnaya:'Snezhnaya', nodkrai:'Nod-Krai',
+        outlander:'Ailleurs', unknown:'Inconnu'
+      };
       const byKey = new Map();
-      remoteCharacters.forEach(remote => {
+      const localByKey = new Map();
+
+      characters.forEach(character => {
+        const key = normalizeCharacterKey(character.slug || character.id || character.name);
+        const nameKey = normalizeCharacterKey(character.name);
+        if (key) localByKey.set(key, character);
+        if (nameKey) localByKey.set(nameKey, character);
+      });
+
+      const completeRoster = remoteCharacters.map(remote => {
         const key = normalizeCharacterKey(remote.key || remote.slug || remote.name);
-        const name = normalizeCharacterKey(remote.name);
-        if (key) byKey.set(key, remote);
-        if (name) byKey.set(name, remote);
-      });
+        const nameKey = normalizeCharacterKey(remote.name);
+        const local = localByKey.get(key) || localByKey.get(nameKey) || {};
+        const images = remote.img || remote.images || {};
+        const vision = String(remote.vision || remote.element || local.element || '');
+        const weapon = String(remote.weapon || remote.weapon_type || local.weapon || '');
+        const nation = String(remote.nation || remote.region || local.region || '');
+        const imageCard = images.card || images.portrait || images['icon-big'] || images.icon || '';
+        const imageSplash = images.banner || images.splash || images.portrait || imageCard || '';
 
-      return characters.map(character => {
-        if (character.card_url || character.image_url) return character;
-
-        const remote = byKey.get(normalizeCharacterKey(character.slug))
-          || byKey.get(normalizeCharacterKey(character.name));
-        const images = remote?.img || remote?.images || {};
-
-        return {
-          ...character,
-          card_url: images.card || images.portrait || images['icon-big'] || images.icon || '',
-          splash_url: images.banner || images.splash || images.portrait || images.card || ''
+        const character = {
+          ...local,
+          id: remote.key || remote.slug || local.id || key,
+          slug: remote.key || remote.slug || local.slug || key,
+          name: remote.name || local.name || 'Personnage inconnu',
+          title: remote.title || local.title || '',
+          element: elementLabels[vision.toLowerCase()] || vision || 'Inconnu',
+          weapon: weaponLabels[weapon.toLowerCase()] || weapon || 'Inconnu',
+          rarity: Number(remote.rarity || local.rarity || 4),
+          region: regionLabels[nation.toLowerCase()] || nation || 'Inconnu',
+          description: remote.description || local.description || '',
+          card_url: local.card_url || imageCard || local.image_url || '',
+          splash_url: local.splash_url || imageSplash || imageCard || local.card_url || ''
         };
+        if (key) byKey.set(key, character);
+        return character;
       });
+
+      // Conserve les entrées locales absentes de la source distante (ex. variantes du Voyageur).
+      characters.forEach(local => {
+        const key = normalizeCharacterKey(local.slug || local.id || local.name);
+        const nameKey = normalizeCharacterKey(local.name);
+        if (!byKey.has(key) && !byKey.has(nameKey)) completeRoster.push(local);
+      });
+
+      return completeRoster.sort((a, b) =>
+        Number(b.rarity || 0) - Number(a.rarity || 0) ||
+        String(a.name).localeCompare(String(b.name), 'fr')
+      );
     } catch (error) {
-      console.warn('Teyvat Chronicles: source d’images externe indisponible, conservation du catalogue MySQL.', error);
+      console.warn('Teyvat Chronicles: catalogue externe indisponible, conservation du catalogue MySQL.', error);
       return characters;
     }
   }
