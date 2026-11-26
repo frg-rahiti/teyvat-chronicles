@@ -13,7 +13,7 @@ if (!$pdo) {
 $element = trim((string)($_GET['element'] ?? ''));
 $search = trim((string)($_GET['q'] ?? ''));
 
-$sql = 'SELECT id, name, title, element, weapon, rarity, region, description, image_url FROM characters WHERE is_published = 1';
+$sql = 'SELECT id, slug, name, title, element, weapon, rarity, region, description, image_url, card_url, splash_url FROM characters WHERE is_published = 1';
 $params = [];
 if ($element !== '' && $element !== 'all') {
     $sql .= ' AND element = :element';
