@@ -1,0 +1,98 @@
+[
+  {
+    "id": "lumine",
+    "name": "Lumine",
+    "title": "",
+    "description": "Une voyageuse venant d'un autre monde qui a été séparée de son frère. Elle débute son périple à la recherche des Sept Archons de Teyvat dans l'espoir de le retrouver.",
+    "element": "Aucun",
+    "weapon": "Épée à une main",
+    "rarity": 5,
+    "region": "Inconnue",
+    "card_url": "https://genshin.jmp.blue/characters/lumine/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lumine/gacha-splash"
+  },
+  {
+    "id": "lynette",
+    "name": "Lynette",
+    "title": "Élégance parmi les ombres",
+    "description": "Une assistante magique au verbe laconique, dont les émotions sont aussi impénétrables que celles d'un chat.",
+    "element": "Anémo",
+    "weapon": "Épée à une main",
+    "rarity": 4,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/lynette/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lynette/gacha-splash"
+  },
+  {
+    "id": "lyney",
+    "name": "Lyney",
+    "title": "Spectacle de fantasmagorie",
+    "description": "Un célèbre magicien fontainois qui a un esprit agile et un grand don pour le bagou. Le public est captivé par ses compétences exquises et s'accroche à chacun de ses mots intelligents.",
+    "element": "Pyro",
+    "weapon": "Arc",
+    "rarity": 5,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/lyney/card",
+    "splash_url": "https://genshin.jmp.blue/characters/lyney/gacha-splash"
+  },
+  {
+    "id": "mavuika",
+    "name": "Mavuika",
+    "title": "Flamme embrasant la nuit",
+    "description": "La dirigeante de Natlan qui a hérité de l'antique nom de Kiongozi. Elle a fait le vœu d'illuminer l'avenir de la nation en guerre avec le sanctifeu.",
+    "element": "Pyro",
+    "weapon": "Épée à deux mains",
+    "rarity": 5,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/mavuika/card",
+    "splash_url": "https://genshin.jmp.blue/characters/mavuika/gacha-splash"
+  },
+  {
+    "id": "mika",
+    "name": "Mika",
+    "title": "Coordonnées du givre clair",
+    "description": "Jeune chevalier né dans une famille ordinaire, il occupe le poste d'arpenteur dans son unité. C'est un personnage au caractère discret et prudent.",
+    "element": "Cryo",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/mika/card",
+    "splash_url": "https://genshin.jmp.blue/characters/mika/gacha-splash"
+  },
+  {
+    "id": "mona",
+    "name": "Mona",
+    "title": "Réflexion astrale",
+    "description": "Jeune astromancienne mystérieuse, Mona se surnomme elle-même « la grande astromancienne Mona », et fait preuve d'une force singulière et d'une érudition hors norme qui ne désavouent pas cette appellation.",
+    "element": "Hydro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/mona/card",
+    "splash_url": "https://genshin.jmp.blue/characters/mona/gacha-splash"
+  },
+  {
+    "id": "mualani",
+    "name": "Mualani",
+    "title": "Chasseuse des vagues rugissantes",
+    "description": "Une guide bien connue à Natlan qui possède un magasin de sports nautiques et est experte dans toutes les formes de sports aquatiques.",
+    "element": "Hydro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/mualani/card",
+    "splash_url": "https://genshin.jmp.blue/characters/mualani/gacha-splash"
+  },
+  {
+    "id": "nahida",
+    "name": "Nahida",
+    "title": "Physique de pureté",
+    "description": "Une oiselle en cage isolée dans les profondeurs du Sanctuaire de Surasthana qui ne peut voir le monde que dans ses rêves.",
+    "element": "Dendro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/nahida/card",
+    "splash_url": "https://genshin.jmp.blue/characters/nahida/gacha-splash"
+  }
+]
