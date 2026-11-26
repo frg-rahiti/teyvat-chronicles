@@ -123,20 +123,43 @@
         snezhnaya:'Snezhnaya', nodkrai:'Nod-Krai',
         outlander:'Ailleurs', unknown:'Inconnu'
       };
-      const byKey = new Map();
-      const localByKey = new Map();
-
-      characters.forEach(character => {
-        const key = normalizeCharacterKey(character.slug || character.id || character.name);
-        const nameKey = normalizeCharacterKey(character.name);
-        if (key) localByKey.set(key, character);
-        if (nameKey) localByKey.set(nameKey, character);
+      const localByName = new Map();
+      characters.forEach(local => {
+        const key = normalizeCharacterKey(local.name);
+        if (key) localByName.set(key, local);
       });
 
-      const completeRoster = remoteCharacters.map(remote => {
-        const key = normalizeCharacterKey(remote.key || remote.slug || remote.name);
-        const nameKey = normalizeCharacterKey(remote.name);
-        const local = localByKey.get(key) || localByKey.get(nameKey) || {};
+      const getTraveler = remote => {
+        const key = normalizeCharacterKey(remote.key || remote.slug || '');
+        const name = normalizeCharacterKey(remote.name || '');
+        const match = key.match(/^(aether|lumine)(?:-|$)/) || name.match(/^(aether|lumine)(?:-|$)/);
+        return match ? match[1] : '';
+      };
+      const getCanonicalKey = remote => {
+        const traveler = getTraveler(remote);
+        if (traveler) return `traveler-${traveler}`;
+        return normalizeCharacterKey(remote.name || remote.key || remote.slug);
+      };
+
+      // Regroupe les variantes élémentaires du Voyageur et déduplique les autres personnages par nom.
+      const canonicalRemote = new Map();
+      remoteCharacters.forEach(remote => {
+        const canonicalKey = getCanonicalKey(remote);
+        if (!canonicalKey) return;
+        const existing = canonicalRemote.get(canonicalKey);
+        const images = remote.img || remote.images || {};
+        const existingImages = existing?.img || existing?.images || {};
+        const hasImage = Boolean(images.card || images.portrait || images['icon-big'] || images.icon);
+        const existingHasImage = Boolean(existingImages.card || existingImages.portrait || existingImages['icon-big'] || existingImages.icon);
+        if (!existing || (hasImage && !existingHasImage)) canonicalRemote.set(canonicalKey, remote);
+      });
+
+      const completeRoster = [];
+      canonicalRemote.forEach((remote, canonicalKey) => {
+        const traveler = canonicalKey.startsWith('traveler-') ? canonicalKey.slice('traveler-'.length) : '';
+        const local = traveler
+          ? localByName.get(traveler === 'aether' ? 'aether' : 'lumine') || {}
+          : localByName.get(normalizeCharacterKey(remote.name)) || {};
         const images = remote.img || remote.images || {};
         const vision = String(remote.vision || remote.element || local.element || '');
         const weapon = String(remote.weapon || remote.weapon_type || local.weapon || '');
@@ -144,29 +167,39 @@
         const imageCard = images.card || images.portrait || images['icon-big'] || images.icon || '';
         const imageSplash = images.banner || images.splash || images.portrait || imageCard || '';
 
-        const character = {
+        completeRoster.push({
           ...local,
-          id: remote.key || remote.slug || local.id || key,
-          slug: remote.key || remote.slug || local.slug || key,
-          name: remote.name || local.name || 'Personnage inconnu',
-          title: remote.title || local.title || '',
+          id: traveler ? (traveler === 'aether' ? 'aether' : 'lumine') : (remote.key || remote.slug || local.id || canonicalKey),
+          slug: traveler ? (traveler === 'aether' ? 'aether' : 'lumine') : (remote.key || remote.slug || local.slug || canonicalKey),
+          name: traveler ? (traveler === 'aether' ? 'Aether' : 'Lumine') : (remote.name || local.name || 'Personnage inconnu'),
+          title: remote.title || local.title || (traveler ? 'Voyageur' : ''),
           element: elementLabels[vision.toLowerCase()] || vision || 'Inconnu',
           weapon: weaponLabels[weapon.toLowerCase()] || weapon || 'Inconnu',
           rarity: Number(remote.rarity || local.rarity || 4),
-          region: regionLabels[nation.toLowerCase()] || nation || 'Inconnu',
+          region: regionLabels[nation.toLowerCase()] || nation || local.region || 'Inconnu',
           description: remote.description || local.description || '',
           card_url: local.card_url || imageCard || local.image_url || '',
           splash_url: local.splash_url || imageSplash || imageCard || local.card_url || ''
-        };
-        if (key) byKey.set(key, character);
-        return character;
+        });
       });
 
-      // Conserve les entrées locales absentes de la source distante (ex. variantes du Voyageur).
+      // Si l'API ne fournit pas le Voyageur, conserve sa fiche locale plutôt que de créer des doublons.
+      ['aether', 'lumine'].forEach(name => {
+        const canonicalKey = `traveler-${name}`;
+        if (!canonicalRemote.has(canonicalKey)) {
+          const local = localByName.get(name);
+          if (local) completeRoster.push({...local, id:name, slug:name});
+        }
+      });
+
+      // Ajoute uniquement les fiches locales dont le nom n'existe pas déjà dans le catalogue distant.
+      const seenNames = new Set(completeRoster.map(character => normalizeCharacterKey(character.name)));
       characters.forEach(local => {
-        const key = normalizeCharacterKey(local.slug || local.id || local.name);
-        const nameKey = normalizeCharacterKey(local.name);
-        if (!byKey.has(key) && !byKey.has(nameKey)) completeRoster.push(local);
+        const key = normalizeCharacterKey(local.name);
+        if (key && !seenNames.has(key)) {
+          completeRoster.push(local);
+          seenNames.add(key);
+        }
       });
 
       return completeRoster.sort((a, b) =>
