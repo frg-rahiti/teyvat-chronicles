@@ -1,0 +1,98 @@
+[
+  {
+    "id": "baizhu",
+    "name": "Baizhu",
+    "title": "Transcendant la mortalité",
+    "description": "Le propriétaire du Cottage Bubu, un serpent blanc appelé Changsheng l'accompagnant. Médecin extrêmement compétent, ses véritables intentions restent cependant un mystère.",
+    "element": "Dendro",
+    "weapon": "Catalyseur",
+    "rarity": 5,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/baizhu/card",
+    "splash_url": "https://genshin.jmp.blue/characters/baizhu/gacha-splash"
+  },
+  {
+    "id": "barbara",
+    "name": "Barbara",
+    "title": "Star de la chanson",
+    "description": "Barbara est adulée de tous à Mondstadt. Pourtant, c'est dans un magazine qu'elle a découvert le terme « idole ».",
+    "element": "Hydro",
+    "weapon": "Catalyseur",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/barbara/card",
+    "splash_url": "https://genshin.jmp.blue/characters/barbara/gacha-splash"
+  },
+  {
+    "id": "beidou",
+    "name": "Beidou",
+    "title": "Reine des mers sans couronne",
+    "description": "Capitaine de la Flotte du Crux, une femme de tête franche et directe.",
+    "element": "Électro",
+    "weapon": "Épée à deux mains",
+    "rarity": 4,
+    "region": "Liyue",
+    "card_url": "https://genshin.jmp.blue/characters/beidou/card",
+    "splash_url": "https://genshin.jmp.blue/characters/beidou/gacha-splash"
+  },
+  {
+    "id": "bennett",
+    "name": "Bennett",
+    "title": "Prince de la guigne",
+    "description": "Un jeune aventurier originaire de Mondstadt. Sa gentillesse n'a d'égale que sa guigne.",
+    "element": "Pyro",
+    "weapon": "Épée à une main",
+    "rarity": 4,
+    "region": "Mondstadt",
+    "card_url": "https://genshin.jmp.blue/characters/bennett/card",
+    "splash_url": "https://genshin.jmp.blue/characters/bennett/gacha-splash"
+  },
+  {
+    "id": "candace",
+    "name": "Candace",
+    "title": "Serment doré",
+    "description": "Descendante du roi Deshret avec un œil gauche de couleur ambre, c'est la protectrice du Village d'Aaru.",
+    "element": "Hydro",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Sumeru",
+    "card_url": "https://genshin.jmp.blue/characters/candace/card",
+    "splash_url": "https://genshin.jmp.blue/characters/candace/gacha-splash"
+  },
+  {
+    "id": "charlotte",
+    "name": "Charlotte",
+    "title": "Œil pour la vérité",
+    "description": "Une infatigable journaliste de L'Oiseau de vapeur, en constante recherche de la « vérité ».",
+    "element": "Cryo",
+    "weapon": "Catalyseur",
+    "rarity": 4,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/charlotte/card",
+    "splash_url": "https://genshin.jmp.blue/characters/charlotte/gacha-splash"
+  },
+  {
+    "id": "chasca",
+    "name": "Chasca",
+    "title": "Arbitre du ciel",
+    "description": "La médiatrice des Tlalocans, celle qui met fin à toutes les querelles.",
+    "element": "Anémo",
+    "weapon": "Arc",
+    "rarity": 5,
+    "region": "Natlan",
+    "card_url": "https://genshin.jmp.blue/characters/chasca/card",
+    "splash_url": "https://genshin.jmp.blue/characters/chasca/gacha-splash"
+  },
+  {
+    "id": "chevreuse",
+    "name": "Chevreuse",
+    "title": "Exécutrice de la justice",
+    "description": "La capitaine de la patrouille de surveillance spéciale, qui porte la justice comme un sceau omniprésent sur son cœur. Son mousquet ne doit pointer que vers les coupables.",
+    "element": "Pyro",
+    "weapon": "Arme d'hast",
+    "rarity": 4,
+    "region": "Fontaine",
+    "card_url": "https://genshin.jmp.blue/characters/chevreuse/card",
+    "splash_url": "https://genshin.jmp.blue/characters/chevreuse/gacha-splash"
+  }
+]
