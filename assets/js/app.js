@@ -452,4 +452,52 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, {passive:true});
   if (grid) loadCharacters();
+
+  // Page transitions: same-origin navigation with a short exit motion.
+  if (!reduceMotion) {
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin || url.pathname === window.location.pathname && url.hash) return;
+      if (!/^https?:$/.test(url.protocol)) return;
+      event.preventDefault();
+      document.documentElement.classList.add('page-leaving');
+      window.setTimeout(() => { window.location.href = url.href; }, 190);
+    });
+  }
+
+  // Staggered reveal for every editorial block, not just cards.
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const revealTargets = document.querySelectorAll('.home-intro, .home-outro, .page-hero, .section-heading, .destination-card, .guide-card, .region-card, .community-page-section, .character-card');
+    revealTargets.forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 65}ms`);
+      if (!element.classList.contains('revealed')) revealObserver?.observe(element);
+    });
+  }
+
+  // Ambient cursor glow on immersive sections.
+  document.querySelectorAll('.hero, .page-hero, .community-page-section, .home-outro').forEach(section => {
+    section.addEventListener('pointermove', event => {
+      if (reduceMotion || event.pointerType === 'touch') return;
+      const rect = section.getBoundingClientRect();
+      section.style.setProperty('--glow-x', `${event.clientX - rect.left}px`);
+      section.style.setProperty('--glow-y', `${event.clientY - rect.top}px`);
+    }, {passive:true});
+  });
+
+  // Character detail modal receives a deliberate entrance/exit treatment.
+  dialog?.addEventListener('close', () => dialog.classList.remove('dialog-open'));
+  dialog?.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
+  });
+  const originalOpenCharacter = openCharacter;
+  // Small interaction cues for navigation and calls to action.
+  document.querySelectorAll('.button, .header-cta, .destination-link').forEach(control => {
+    control.addEventListener('pointerdown', () => {
+      if (!reduceMotion) control.classList.add('is-pressed');
+    });
+    ['pointerup','pointerleave','blur'].forEach(type => control.addEventListener(type, () => control.classList.remove('is-pressed')));
+  });
+
 })();
