@@ -397,6 +397,19 @@
 
   // Tiny ambient particles: CSS-only motion after this one-time DOM setup.
   const heroArt = document.querySelector('.hero-art');
+  if (heroArt && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    heroArt.addEventListener('pointermove', event => {
+      const rect = heroArt.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      heroArt.style.setProperty('--hero-pointer-x', `${(x * 14).toFixed(2)}px`);
+      heroArt.style.setProperty('--hero-pointer-y', `${(y * 14).toFixed(2)}px`);
+    }, {passive:true});
+    heroArt.addEventListener('pointerleave', () => {
+      heroArt.style.setProperty('--hero-pointer-x', '0px');
+      heroArt.style.setProperty('--hero-pointer-y', '0px');
+    }, {passive:true});
+  }
   if (heroArt && !heroArt.querySelector('.hero-particles')) {
     const particles = document.createElement('div');
     particles.className = 'hero-particles';
@@ -431,7 +444,7 @@
 
   // Soft pointer lighting and restrained 3D tilt for desktop cards.
   const attachCardMotion = root => {
-    root.querySelectorAll('.character-card, .region-card, .guide-card').forEach(card => {
+    root.querySelectorAll('.character-card, .region-card, .guide-card, .destination-card').forEach(card => {
       if (card.dataset.motionReady) return;
       card.dataset.motionReady = 'true';
       card.addEventListener('pointermove', event => {
