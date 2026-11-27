@@ -357,13 +357,8 @@
     }, {passive:true});
   }
 
-  // Global navigation, scroll progress, ambient hero details and interactive card lighting.
+  // Global navigation without scroll-linked style writes (better async scrolling in Firefox).
   const body = document.body;
-  const progress = document.createElement('div');
-  progress.className = 'scroll-progress';
-  progress.setAttribute('aria-hidden', 'true');
-  body.append(progress);
-
   const backToTop = document.createElement('button');
   backToTop.className = 'back-to-top';
   backToTop.type = 'button';
@@ -372,14 +367,29 @@
   body.append(backToTop);
   backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'}));
 
-  const updateScrollUI = () => {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-    progress.style.transform = `scaleX(${ratio})`;
-    backToTop.classList.toggle('is-visible', window.scrollY > 520);
-  };
-  updateScrollUI();
-  window.addEventListener('scroll', updateScrollUI, {passive:true});
+  const scrollSentinel = document.createElement('span');
+  scrollSentinel.setAttribute('aria-hidden', 'true');
+  scrollSentinel.style.cssText = 'position:absolute;top:520px;left:0;width:1px;height:1px;pointer-events:none;';
+  body.prepend(scrollSentinel);
+  if ('IntersectionObserver' in window) {
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      backToTop.classList.toggle('is-visible', !entry.isIntersecting);
+    });
+    visibilityObserver.observe(scrollSentinel);
+  }
+
+  // Header state is observed instead of recalculated on every scroll frame.
+  const header = document.querySelector('.site-header');
+  const headerSentinel = document.createElement('span');
+  headerSentinel.setAttribute('aria-hidden', 'true');
+  headerSentinel.style.cssText = 'position:absolute;top:24px;left:0;width:1px;height:1px;pointer-events:none;';
+  body.prepend(headerSentinel);
+  if (header && 'IntersectionObserver' in window) {
+    const headerObserver = new IntersectionObserver(([entry]) => {
+      header.classList.toggle('scrolled', !entry.isIntersecting);
+    });
+    headerObserver.observe(headerSentinel);
+  }
 
   // Tiny ambient particles: CSS-only motion after this one-time DOM setup.
   const heroArt = document.querySelector('.hero-art');
@@ -447,10 +457,6 @@
     control.addEventListener('focus', () => control.closest('.search-box, .rarity-filter')?.classList.add('is-focused'));
     control.addEventListener('blur', () => control.closest('.search-box, .rarity-filter')?.classList.remove('is-focused'));
   });
-  const header = document.querySelector('.site-header');
-  const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, {passive:true});
   if (grid) loadCharacters();
 
   // Page transitions: same-origin navigation with a short exit motion.
