@@ -305,10 +305,14 @@
     nav.classList.remove('is-open'); menuToggle?.setAttribute('aria-expanded', 'false');
   }));
 
+  const revealSelector = '.home-intro, .home-outro, .page-hero, .section-heading, .guide-card, .region-card, .community-section, .community-page-section, .character-card, .destination-card';
   const observeReveals = root => {
     if (!root || !('IntersectionObserver' in window)) return;
-    root.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card, .destination-card')
-      .forEach(el => revealObserver.observe(el));
+    root.querySelectorAll(revealSelector).forEach((el, index) => {
+      el.classList.add('motion-reveal');
+      el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 90}ms`);
+      revealObserver.observe(el);
+    });
   };
   let revealObserver = null;
   if ('IntersectionObserver' in window) {
@@ -321,7 +325,7 @@
       cardObserver.observe(grid, {childList:true});
     }
   } else {
-    document.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card, .destination-card').forEach(el => el.classList.add('revealed'));
+    document.querySelectorAll(revealSelector).forEach(el => el.classList.add('revealed'));
   }
 
   // Parallaxe multi-couches : chaque élément du décor se déplace à une vitesse différente.
@@ -397,7 +401,7 @@
     const particles = document.createElement('div');
     particles.className = 'hero-particles';
     particles.setAttribute('aria-hidden', 'true');
-    for (let index = 0; index < 22; index += 1) {
+    for (let index = 0; index < 34; index += 1) {
       const particle = document.createElement('i');
       particle.style.setProperty('--particle-x', `${(index * 37 + 11) % 96}%`);
       particle.style.setProperty('--particle-y', `${(index * 53 + 7) % 90}%`);
@@ -473,14 +477,7 @@
     });
   }
 
-  // Staggered reveal for every editorial block, not just cards.
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    const revealTargets = document.querySelectorAll('.home-intro, .home-outro, .page-hero, .section-heading, .destination-card, .guide-card, .region-card, .community-page-section, .character-card');
-    revealTargets.forEach((element, index) => {
-      element.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 65}ms`);
-      if (!element.classList.contains('revealed')) revealObserver?.observe(element);
-    });
-  }
+  // The reveal observer is initialized once and covers all page sections above.
 
   // Ambient cursor glow on immersive sections.
   document.querySelectorAll('.hero, .page-hero, .community-page-section, .home-outro').forEach(section => {
