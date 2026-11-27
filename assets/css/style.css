@@ -661,3 +661,69 @@ html.page-leaving body{animation:chronicle-leave .28s ease both;pointer-events:n
   .motion-reveal{opacity:1!important;translate:0 0!important;filter:none!important;transition:none!important}
   .main-nav,.main-nav a{transition:none!important;transform:none!important}
 }
+
+
+/* === MOTION+ v0.4.0: interactive depth and cinematic polish === */
+.hero-art{perspective:1100px;transform-style:preserve-3d}
+.hero-art .hero-glass{
+  transform:translate3d(calc(var(--hero-pointer-x,0px)*-.25),calc(var(--hero-pointer-y,0px)*-.25),-12px);
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+.hero-art .hero-sigil{
+  transform:translate3d(calc(var(--hero-pointer-x,0px)*.65),calc(var(--hero-pointer-y,0px)*.65),32px);
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+.hero-art .orbit-a{
+  translate:calc(var(--hero-pointer-x,0px)*-.45) calc(var(--hero-pointer-y,0px)*-.45);
+  transition:translate .65s cubic-bezier(.16,1,.3,1);
+}
+.hero-art .orbit-b{
+  translate:calc(var(--hero-pointer-x,0px)*.5) calc(var(--hero-pointer-y,0px)*.5);
+  transition:translate .65s cubic-bezier(.16,1,.3,1);
+}
+.destination-card{
+  transform:perspective(900px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg));
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.destination-card:hover{
+  transform:perspective(900px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg)) translateY(-8px);
+}
+.destination-card .destination-index,.destination-card h3,.destination-card p,.destination-card .destination-link{
+  transform:translateZ(18px);
+}
+.region-card,.guide-card,.character-card{
+  transform-style:preserve-3d;
+}
+.region-card .region-content,.guide-card>*{
+  transform:translateZ(12px);
+}
+.character-card .character-info{
+  transform:translateZ(14px);
+}
+.motion-reveal{
+  transition-timing-function:cubic-bezier(.16,1,.3,1);
+}
+.motion-reveal.revealed{
+  animation:reveal-settle .65s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes reveal-settle{
+  0%{filter:blur(2px)}
+  100%{filter:blur(0)}
+}
+.main-nav a{transition:color .25s ease,opacity .25s ease,transform .35s cubic-bezier(.16,1,.3,1)}
+.main-nav a::after{transition:inset-inline .35s cubic-bezier(.16,1,.3,1),left .35s,right .35s}
+.button,.header-cta,.destination-link{
+  transition:transform .35s cubic-bezier(.16,1,.3,1),background .3s,color .3s,box-shadow .35s;
+}
+.button:hover,.header-cta:hover,.destination-link:hover{
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+}
+@media(hover:none){
+  .hero-art .hero-glass,.hero-art .hero-sigil,.hero-art .orbit-a,.hero-art .orbit-b{transform:none;translate:none}
+  .destination-card,.destination-card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-art .hero-glass,.hero-art .hero-sigil,.hero-art .orbit-a,.hero-art .orbit-b{transition:none!important;transform:none!important;translate:none!important}
+  .destination-card,.destination-card:hover{transform:none!important}
+}
