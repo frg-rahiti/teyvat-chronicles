@@ -10,7 +10,7 @@ $activePage = 'community';
 <title>Communauté — TEYVAT CHRONICLES</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=9"></head><body class="inner-page">
+<link rel="stylesheet" href="assets/css/style.css?v=10"></head><body class="inner-page">
 <?php require __DIR__ . '/includes/site-header.php'; ?>
 <main><section class="page-hero"><div class="eyebrow"><i></i> Le courrier des voyageurs</div><h1>La communauté <em>de Teyvat.</em></h1><p>Retrouvez les nouveautés du carnet et restez informé des prochaines explorations.</p><div class="page-hero-meta">RENCONTRES · ACTUALITÉS · PARTAGE</div></section>
 <section class="community-page-section"><div class="community-orb">✧</div><div class="eyebrow"><i></i> Les nouvelles du voyage</div><h2>Une nouvelle aventure<br><em>à chaque visite.</em></h2><p>Recevez les nouveaux guides et les mises à jour du carnet de Teyvat.</p>
