@@ -506,3 +506,91 @@ html.page-leaving body{animation:site-leave .19s ease both}
  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
  body{animation:none!important}
 }
+
+
+/* === CHRONICLES MOTION UPDATE v0.3.4 === */
+/* Content reveals: JS adds this class only when the observer is ready. */
+.motion-reveal{
+  opacity:0;
+  translate:0 24px;
+  filter:blur(5px);
+  transition:
+    opacity .8s var(--motion-cinematic,var(--motion-soft)),
+    translate .85s var(--motion-cinematic,var(--motion-soft)),
+    filter .8s var(--motion-cinematic,var(--motion-soft));
+  transition-delay:var(--reveal-delay,0ms);
+  will-change:opacity,translate,filter;
+}
+.motion-reveal.revealed{
+  opacity:1;
+  translate:0 0;
+  filter:blur(0);
+}
+/* The landing hero gets a more noticeable, cinematic entrance. */
+.home-hero .hero-copy>.eyebrow,
+.home-hero .hero-copy>h1,
+.home-hero .hero-copy>p,
+.home-hero .hero-actions,
+.home-hero .hero-footnote{
+  animation:hero-copy-enter .95s var(--motion-cinematic) both;
+}
+.home-hero .hero-copy>.eyebrow{animation-delay:.08s}
+.home-hero .hero-copy>h1{animation-delay:.2s}
+.home-hero .hero-copy>p{animation-delay:.34s}
+.home-hero .hero-actions{animation-delay:.46s}
+.home-hero .hero-footnote{animation-delay:.58s}
+.home-hero .hero-art{animation:hero-art-enter 1.35s var(--motion-cinematic) .18s both}
+@keyframes hero-copy-enter{
+  from{opacity:0;translate:0 24px;filter:blur(7px)}
+  to{opacity:1;translate:0 0;filter:blur(0)}
+}
+@keyframes hero-art-enter{
+  from{opacity:0;scale:.91;filter:blur(9px)}
+  to{opacity:1;scale:1;filter:blur(0)}
+}
+/* Slow celestial movement, independent of scroll position. */
+.hero-art .orbit-a{rotate:0deg;animation:orbit-spin 48s linear infinite}
+.hero-art .orbit-b{rotate:0deg;animation:orbit-spin-reverse 58s linear infinite}
+@keyframes orbit-spin{to{rotate:360deg}}
+@keyframes orbit-spin-reverse{to{rotate:-360deg}}
+.hero-sigil{animation:sigil-breathe 5.5s ease-in-out infinite}
+@keyframes sigil-breathe{
+  0%,100%{scale:1;filter:drop-shadow(0 0 15px rgba(238,216,170,.18))}
+  50%{scale:1.075;filter:drop-shadow(0 0 32px rgba(238,216,170,.58))}
+}
+.hero-glass{animation:glass-breathe 8s ease-in-out infinite}
+@keyframes glass-breathe{
+  0%,100%{box-shadow:0 0 80px rgba(177,194,174,.12),inset 0 0 65px rgba(255,255,255,.05)}
+  50%{box-shadow:0 0 125px rgba(177,194,174,.28),inset 0 0 95px rgba(255,255,255,.11)}
+}
+.floating-note{animation:note-float 6s ease-in-out infinite}
+.note-bottom{animation-delay:-3s}
+@keyframes note-float{0%,100%{translate:0 0}50%{translate:0 -11px}}
+.hero-scroll span{transform-origin:left;animation:scroll-pulse 1.8s ease-in-out infinite}
+/* More tactile cards and links. */
+.destination-card{transition:translate .45s var(--motion-cinematic),box-shadow .45s,filter .45s}
+.destination-card:hover{translate:0 -8px;filter:saturate(1.12)}
+.destination-card .destination-mark{animation:mark-drift 8s ease-in-out infinite}
+@keyframes mark-drift{0%,100%{translate:0 0;rotate:-5deg}50%{translate:0 -13px;rotate:8deg}}
+.character-card,.region-card,.guide-card{transition:transform .45s var(--motion-cinematic),box-shadow .45s,filter .45s}
+.character-card:hover,.region-card:hover,.guide-card:hover{filter:saturate(1.08) brightness(1.025)}
+.character-art img,.dialog-visual img{transition:transform .9s var(--motion-cinematic),filter .7s}
+.character-card:hover .character-art img{transform:scale(1.065)}
+.region-card,.guide-card{transition:transform .5s var(--motion-cinematic),box-shadow .5s,filter .5s}
+.region-card:hover,.guide-card:hover{transform:translateY(-7px)}
+.region-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,transparent 20%,rgba(255,255,255,.12),transparent 62%);translate:-120% 0;transition:translate .9s var(--motion-cinematic)}
+.region-card:hover:after{translate:120% 0}
+.button,.header-cta,.text-link,.destination-link{transition:color .3s,background .3s,translate .3s,letter-spacing .3s}
+.text-link:hover,.destination-link:hover{letter-spacing:.17em}
+.button:hover,.header-cta:hover{translate:0 -3px}
+/* Mobile: keep motion elegant and avoid hover-only affordances. */
+@media(max-width:720px){
+  .home-hero .hero-art{animation-duration:1s}
+  .hero-art .orbit-a,.hero-art .orbit-b{animation-duration:75s}
+  .hero-sigil{animation-duration:7s}
+  .motion-reveal{translate:0 16px;filter:blur(3px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .motion-reveal{opacity:1!important;translate:0 0!important;filter:none!important;transition:none!important}
+  .home-hero .hero-copy>*,.home-hero .hero-art,.hero-art .orbit-a,.hero-art .orbit-b,.hero-sigil,.hero-glass,.floating-note,.destination-mark{animation:none!important}
+}
