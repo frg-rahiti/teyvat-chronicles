@@ -473,7 +473,7 @@
       if (!/^https?:$/.test(url.protocol)) return;
       event.preventDefault();
       document.documentElement.classList.add('page-leaving');
-      window.setTimeout(() => { window.location.href = url.href; }, 190);
+      window.setTimeout(() => { window.location.href = url.href; }, 300);
     });
   }
 
@@ -494,7 +494,6 @@
   dialog?.addEventListener('click', event => {
     if (event.target === dialog) dialog.close();
   });
-  const originalOpenCharacter = openCharacter;
   // Small interaction cues for navigation and calls to action.
   document.querySelectorAll('.button, .header-cta, .destination-link').forEach(control => {
     control.addEventListener('pointerdown', () => {
