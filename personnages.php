@@ -10,7 +10,7 @@ $activePage = 'characters';
 <title>Personnages — TEYVAT CHRONICLES</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=13"></head><body class="inner-page">
+<link rel="stylesheet" href="assets/css/style.css?v=14"></head><body class="inner-page">
 <?php require __DIR__ . '/includes/site-header.php'; ?>
 <main><section class="page-hero"><div class="eyebrow"><i></i> Le carnet du voyageur</div><h1>Rencontrez les <em>héros.</em></h1><p>Parcourez le catalogue, trouvez votre prochain compagnon et découvrez son histoire.</p><div class="page-hero-meta">CATALOGUE DES PERSONNAGES · TEYVAT</div></section>
 <section class="section characters-section standalone-catalog">
