@@ -231,6 +231,7 @@
   }
 
   async function loadCharacters() {
+    if (!grid) return;
     try {
       const response = await fetch('api/catalog.php', {
         headers: {'Accept':'application/json'},
@@ -304,17 +305,23 @@
     nav.classList.remove('is-open'); menuToggle?.setAttribute('aria-expanded', 'false');
   }));
 
-  const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('revealed'); revealObserver.unobserve(entry.target); }
-  }), {threshold:0.12});
   const observeReveals = root => {
-    root.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card')
+    if (!root || !('IntersectionObserver' in window)) return;
+    root.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card, .destination-card')
       .forEach(el => revealObserver.observe(el));
   };
-  observeReveals(document);
-  if (grid) {
-    const cardObserver = new MutationObserver(() => observeReveals(grid));
-    cardObserver.observe(grid, {childList:true});
+  let revealObserver = null;
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('revealed'); revealObserver.unobserve(entry.target); }
+    }), {threshold:0.12});
+    observeReveals(document);
+    if (grid) {
+      const cardObserver = new MutationObserver(() => observeReveals(grid));
+      cardObserver.observe(grid, {childList:true});
+    }
+  } else {
+    document.querySelectorAll('.section-heading, .guide-card, .region-card, .community-section, .character-card, .destination-card').forEach(el => el.classList.add('revealed'));
   }
 
   // Parallaxe multi-couches : chaque élément du décor se déplace à une vitesse différente.
@@ -444,5 +451,5 @@
   const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
   updateHeader();
   window.addEventListener('scroll', updateHeader, {passive:true});
-  loadCharacters();
+  if (grid) loadCharacters();
 })();
